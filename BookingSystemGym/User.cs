@@ -12,7 +12,10 @@ namespace BookingSystemGym
         public string Role { get; set; }
         public string Name { get; set; }
 
+        public User()
+        {
 
+        }
 
         public void MakeReservation(Activity a)
         {

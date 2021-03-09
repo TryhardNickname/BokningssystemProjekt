@@ -28,6 +28,14 @@ namespace BookingSystemGym
 
 
             //get registerd UserList
+            UserList = new List<User>();
+            string[] ul = File.ReadAllLines(@"../../userlist.txt");
+
+            foreach (string s in eq)
+            {
+                UserList.Add(new User());
+            }
+
 
             //get schedule
 
