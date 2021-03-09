@@ -6,13 +6,9 @@ using System.Threading.Tasks;
 
 namespace BookingSystemGym
 {
-    class Program
+    class Person
     {
-        static void Main(string[] args)
-        {
-    
+        public int id { get; set; }
 
-
-        }
     }
 }
