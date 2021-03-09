@@ -10,7 +10,14 @@ namespace BookingSystemGym
     {
         static void Main(string[] args)
         {
-    
+
+            BookingSystem bs = new BookingSystem();
+            string userSel = "";
+            if ( userSel == "2")
+            {
+                string schedule = bs.ShowSchedule();
+                Console.WriteLine(schedule);
+            }
 
 
         }
