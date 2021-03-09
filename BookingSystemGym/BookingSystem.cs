@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace BookingSystemGym
 {
@@ -14,6 +15,24 @@ namespace BookingSystemGym
         public List<User> UserList { get; set; }
         public User CurrentUser { get; set; }
 
+        public BookingSystem()
+        {
+            //get list of equipments?
+            Equipments = new List<Equipment>();
+            string[] eq = File.ReadAllLines(@"../../equipments.txt");
+            
+            foreach (string s in eq)
+            {
+                Equipments.Add(new Equipment(true, 1, s));
+            }
+
+
+            //get registerd UserList
+
+            //get schedule
+
+            LogIn();
+        }
 
         public void AddToSchedule()
         {
@@ -41,7 +60,13 @@ namespace BookingSystemGym
 
         public string ShowBrokenEquip()
         {
-            return "";
+            string res = "";
+            foreach (Equipment e in Equipments)
+            {
+                if (e.Broken)
+                    res += e.Name + "\n";
+            }
+            return res;
         }
 
         public void LogIn()

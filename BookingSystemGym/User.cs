@@ -19,6 +19,5 @@ namespace BookingSystemGym
             a.BookedParticipants += 1;
         }
 
-        public void
     }
 }

@@ -12,13 +12,31 @@ namespace BookingSystemGym
         {
 
             BookingSystem bs = new BookingSystem();
-            string userSel = "";
-            if ( userSel == "2")
+
+            string userInput = "";
+            
+            while (userInput != "0")
             {
-                string schedule = bs.ShowSchedule();
-                Console.WriteLine(schedule);
+                Console.WriteLine("input choice: ");
+                userInput = Console.ReadLine();
+
+                if (userInput == "2")
+                {
+                    string schedule = bs.ShowSchedule();
+                    Console.WriteLine(schedule);
+                }
+                if (userInput == "3")
+                {
+                    string bi = bs.ShowBrokenEquip();
+                    Console.WriteLine(bi);
+                }
+
+                
             }
 
+
+
+            Console.ReadKey();
 
         }
     }
