@@ -26,7 +26,6 @@ namespace BookingSystemGym
                 Equipments.Add(new Equipment(true, 1, s));
             }
 
-
             //get registerd UserList
 
             //get schedule
@@ -34,13 +33,29 @@ namespace BookingSystemGym
             LogIn();
         }
 
-        public void AddToSchedule()
+        public void CreateSchedule()
+        {
+            List<Activity> Schedule = new List<Activity>();
+            //Activity act = new Activity(inputType, inputTime, inputRoom, inputTrainer);
+            //Schedule.Add(act);
+        }
+
+        public void SaveSchedule()
+        {
+            List<string> Save = new List<string>();
+            foreach (var activity in Schedule)
+            {
+                Save.Add($"{activity.Type};{activity.ScheduledTime};{activity.Room};{/*activity.Trainer*/}");
+            }
+            //File.WriteAllLines(scheduleFile, Save);
+        }
+
+        public void AddToSchedule(Activity a)
         {
             if (CurrentUser.Role != "Admin")
             {
                 return;
             }
-
         }
 
         public void RemoveFromSchedule(Activity a)
