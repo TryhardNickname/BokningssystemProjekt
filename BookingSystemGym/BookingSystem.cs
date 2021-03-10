@@ -40,7 +40,7 @@ namespace BookingSystemGym
 
             //get schedule
 
-            LogIn();
+            //LogIn();
         }
 
         public void AddToSchedule(Activity a)
