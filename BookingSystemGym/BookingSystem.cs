@@ -31,10 +31,10 @@ namespace BookingSystemGym
             UserList = new List<User>();
             string[] ul = File.ReadAllLines(@"../../userlist.txt");
 
-            foreach (string s in eq)
+            foreach (string line in ul)
             {
-                string[] sa = s.Split(',');
-                UserList.Add(new User(sa[0], sa[1], sa[2]));
+                string[] usr = line.Split(',');
+                UserList.Add(new User(usr[0], usr[1], usr[2]));
             }
 
 
@@ -43,23 +43,35 @@ namespace BookingSystemGym
             LogIn();
         }
 
-        public void AddToSchedule()
+        public void AddToSchedule(Activity a)
         {
-            if (CurrentUser.Role != "Admin")
+            if (CurrentUser.Role == "Admin")
             {
-                return;
+                Schedule.Add(a);
             }
+            else
+            {
+                //"you dont have premission"
+            }
+
 
         }
 
         public void RemoveFromSchedule(Activity a)
         {
-            foreach (Activity b in Schedule)
+            if (CurrentUser.Role == "Admin")
             {
-                if (a.Id == b.Id)
+                if (Schedule.Remove(a))
                 {
-                    Schedule.Remove(b);
+                    //skicka meddelande "a är borttaget"
                 }
+                //foreach (Activity b in Schedule)
+                //{
+                //    if (a.Id == b.Id)
+                //    {
+                //        Schedule.Remove(b);
+                //    }
+                //}
             }
         }
         public string ShowSchedule()
@@ -78,14 +90,40 @@ namespace BookingSystemGym
             return res;
         }
 
-        public void LogIn()
+        //returns true if succesful
+        public bool LogIn(string inputId)
         {
-
+            foreach (User u in UserList)
+            {
+                if (u.Id == inputId)
+                {
+                    //User exists
+                    CurrentUser = u;
+                    return true;
+                }
+            }
+            //if no user is found
+            //"please register to log in"
+            //Register(inputId);
+            return false;
         }
 
-        public void Register()
+        //returns true if succesful
+        public bool Register(string inputId, string role, string name)
         {
+            foreach (User u in UserList)
+            {
+                if (u.Id == inputId)
+                {
+                    //User already exists
+                    return false;
+                }
+            }
 
+            //new user - sets as currentUser
+            CurrentUser = new User(inputId, role, name);
+            UserList.Add(CurrentUser);
+            return true;
         }
 
 
