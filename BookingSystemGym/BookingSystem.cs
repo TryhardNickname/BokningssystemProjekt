@@ -92,6 +92,14 @@ namespace BookingSystemGym
             return res;
         }
 
+        public void ChangeEquipmentStatus(User user, Equipment equipment)
+        {
+            if (user.Role == "emp" || user.Role == "admin")
+            {
+                equipment.Broken = !equipment.Broken;
+            }
+        }
+
         public void LogIn()
         {
 
