@@ -108,11 +108,34 @@ namespace BookingSystemGym
             {
                 for (int i = 0; i < Equipments.Count; i++)
                 {
-                    Console.WriteLine($"{i}. {Equipments[i].Name}");
+                    Console.WriteLine($"{i + 1}. {Equipments[i].Name}");
                 }
 
-                int userInput = int.Parse(Console.ReadLine());
+                int userInput = int.Parse(Console.ReadLine()) - 1;
                 Equipments[userInput].Broken = !Equipments[userInput].Broken;
+            }
+        }
+
+        public void ChangeActivity(User user)
+        {
+            string[] propertiesToChange = new string[] { "SessionLength", "ScheduledTime", "MaxParticipants", 
+                                                         "BookedParticipants", "Type", "Room", "Id" };
+            if (user.Role == "emp" || user.Role == "admin")
+            {
+                for (int i = 0; i < Schedule.Count; i++)
+                {
+                    //Kanske måste fixa ett namn för varje aktivitet? blir träligt att välja bland siffror tänker jag.
+                    Console.WriteLine($"{i + 1}. {Schedule[i].Id}");
+                }
+                int userInputWhichActivity = int.Parse(Console.ReadLine()) - 1;
+
+                for (int i = 0; i < propertiesToChange.Length; i++)
+                {
+                    Console.WriteLine($"{i + 1}. {propertiesToChange[i]}");
+                }
+                int userInputWhichProp = int.Parse(Console.ReadLine()) - 1;
+                                                //userInputWhichProp
+                Schedule[userInputWhichActivity].UpdateActivity();
             }
         }
 
