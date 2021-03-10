@@ -14,7 +14,7 @@ namespace BookingSystemGym
 
         public User()
         {
-
+            int i = 0;
         }
 
         public void MakeReservation(Activity a)
