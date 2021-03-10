@@ -36,31 +36,31 @@ namespace BookingSystemGym
                 case 1:
                     int newSessionLength = int.Parse(Console.ReadLine());
                     this.SessionLength = newSessionLength;
-                    break;
+                    break;  // In Bookingsystem, print the new value of SessionLength
                 case 2:
                     DateTime newScheduledTime = DateTime.Parse(Console.ReadLine());
                     this.ScheduledTime = newScheduledTime;
-                    break;
+                    break;  // In Bookingsystem, print the new value of ScheduledTime
                 case 3:
                     int newMaxParticipants = int.Parse(Console.ReadLine());
                     this.MaxParticipants = newMaxParticipants;
-                    break;
+                    break;  // In Bookingsystem, print the new value of MaxParticipants
                 case 4:
                     int newBookedParticipants = int.Parse(Console.ReadLine());
                     this.BookedParticipants = newBookedParticipants;
-                    break;
+                    break;  // In Bookingsystem, print the new value of BookedParticipants
                 case 5:
                     string newType = Console.ReadLine();
                     this.Type = newType;
-                    break;
+                    break;  // In Bookingsystem, print the new value of Type
                 case 6:
                     string newRoom = Console.ReadLine();
                     this.Room = newRoom;
-                    break;
+                    break;  // In Bookingsystem, print the new value of Room
                 case 7:
                     int newId = int.Parse(Console.ReadLine());
                     this.Id = newId;
-                    break;
+                    break;  // In Bookingsystem, print the new value of Id
             }
 
             
