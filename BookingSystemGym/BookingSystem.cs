@@ -45,7 +45,7 @@ namespace BookingSystemGym
         public void CreateSchedule()
         {
             Schedule = new List<Activity>();
-            Activity act = new Activity(1, new DateTime(2021, 03, 10), 20, "gym", "big room", 1337);
+            Activity act = new Activity(1, new DateTime(2021, 03, 10), 20, "gym", "big room", 1337, "Anna Anderson");
             Schedule.Add(act);
         }
 
@@ -122,12 +122,14 @@ namespace BookingSystemGym
             if (user.Role == "emp" || user.Role == "admin")
             {
 
+                // skriv ut aktivitetens id och typ
                 for (int i = 0; i < Schedule.Count; i++)
                 { 
-                    Console.WriteLine($"{i + 1}. {Schedule[i].Id}");
+                    Console.WriteLine($"{Schedule[i].Id} - {Schedule[i].Type}");
                 }
-                int userInputWhichActivity = int.Parse(Console.ReadLine()) - 1;
+                int userInputWhichActivity = int.Parse(Console.ReadLine());
 
+                // om man hittar en ID bland alla IDs, breaka och använd indexet
                 int index = 0;
                 foreach (Activity a in Schedule)
                 {          
@@ -138,6 +140,7 @@ namespace BookingSystemGym
                     index++;
                 }
 
+                // välj vilken property du vill ändra
                 Console.WriteLine($"1. Session Length: {Schedule[index].SessionLength}");
                 Console.WriteLine($"2. Scheduled Time: {Schedule[index].ScheduledTime}");
                 Console.WriteLine($"3. Max Participants: {Schedule[index].MaxParticipants}");
@@ -150,6 +153,8 @@ namespace BookingSystemGym
 
                 Schedule[index].UpdateActivity(userInputWhichProp);
 
+                // skriver ut värdet på propertyn man ändrade
+                // gör instruktioner
                 switch (userInputWhichProp)
                 {
                     case 1:
@@ -177,7 +182,6 @@ namespace BookingSystemGym
                         Console.WriteLine($"New Trainer: {Schedule[index].Trainer}");
                         break;
                 }
-                Console.WriteLine();
             }
             
         }
