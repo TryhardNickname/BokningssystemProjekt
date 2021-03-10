@@ -11,7 +11,7 @@ namespace BookingSystemGym
         public int SessionLength { get; private set;  }
         public DateTime ScheduledTime{ get; private set; }
         public int MaxParticipants { get; private set; }
-        public int BookedParticipants { get; private set; }
+        public int BookedParticipants { get; set; }
         public string Type { get; private set; } //PT / 
         public string Room { get; private set; }
         public int Id { get; private set; }
