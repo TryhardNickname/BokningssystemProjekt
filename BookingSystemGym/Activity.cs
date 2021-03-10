@@ -21,15 +21,48 @@ namespace BookingSystemGym
             SessionLength = sessionLength;
             ScheduledTime = scheduledTime;
             MaxParticipants = maxParticipants;
+            BookedParticipants = 0;
             Type = type;
             Room = room;
-            BookedParticipants = 0;
             Id = id;
         }
 
 
-        public void UpdateActivity()
+        public void UpdateActivity(int PropToChange)
         {
+
+            switch (PropToChange)
+            {
+                case 1:
+                    int newSessionLength = int.Parse(Console.ReadLine());
+                    this.SessionLength = newSessionLength;
+                    break;
+                case 2:
+                    DateTime newScheduledTime = DateTime.Parse(Console.ReadLine());
+                    this.ScheduledTime = newScheduledTime;
+                    break;
+                case 3:
+                    int newMaxParticipants = int.Parse(Console.ReadLine());
+                    this.MaxParticipants = newMaxParticipants;
+                    break;
+                case 4:
+                    int newBookedParticipants = int.Parse(Console.ReadLine());
+                    this.BookedParticipants = newBookedParticipants;
+                    break;
+                case 5:
+                    string newType = Console.ReadLine();
+                    this.Type = newType;
+                    break;
+                case 6:
+                    string newRoom = Console.ReadLine();
+                    this.Room = newRoom;
+                    break;
+                case 7:
+                    int newId = int.Parse(Console.ReadLine());
+                    this.Id = newId;
+                    break;
+            }
+
             
         }
     }
