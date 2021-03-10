@@ -15,8 +15,9 @@ namespace BookingSystemGym
         public string Type { get; private set; } //PT / 
         public string Room { get; private set; }
         public int Id { get; set; }
+        public string Trainer { get; set; }
 
-        public Activity(int sessionLength, DateTime scheduledTime, int maxParticipants, string type, string room, int id)
+        public Activity(int sessionLength, DateTime scheduledTime, int maxParticipants, string type, string room, int id, string trainer)
         {
             SessionLength = sessionLength;
             ScheduledTime = scheduledTime;
@@ -25,6 +26,7 @@ namespace BookingSystemGym
             Type = type;
             Room = room;
             Id = id;
+            Trainer = trainer;
         }
 
 
@@ -61,6 +63,10 @@ namespace BookingSystemGym
                     int newId = int.Parse(Console.ReadLine());
                     this.Id = newId;
                     break;  // In Bookingsystem, print the new value of Id
+                case 8:
+                    string newTrainer = Console.ReadLine();
+                    this.Trainer = newTrainer;
+                    break;  // In Bookingsystem, print the new value of Trainer
             }
 
             
