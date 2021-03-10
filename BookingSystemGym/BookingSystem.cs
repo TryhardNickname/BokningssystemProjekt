@@ -92,11 +92,27 @@ namespace BookingSystemGym
             return res;
         }
 
+        //variant 1
         public void ChangeEquipmentStatus(User user, Equipment equipment)
         {
             if (user.Role == "emp" || user.Role == "admin")
             {
                 equipment.Broken = !equipment.Broken;
+            }
+        }
+
+        //variant 2
+        public void ChangeEquipmentStatus(User user)
+        {
+            if (user.Role == "emp" || user.Role == "admin")
+            {
+                for (int i = 0; i < Equipments.Count; i++)
+                {
+                    Console.WriteLine($"{i}. {Equipments[i].Name}");
+                }
+
+                int userInput = int.Parse(Console.ReadLine());
+                Equipments[userInput].Broken = !Equipments[userInput].Broken;
             }
         }
 
