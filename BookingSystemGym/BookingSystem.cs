@@ -20,7 +20,7 @@ namespace BookingSystemGym
             //get list of equipments?
             Equipments = new List<Equipment>();
             string[] eq = File.ReadAllLines(@"../../equipments.txt");
-            
+
             foreach (string s in eq)
             {
                 Equipments.Add(new Equipment(true, 1, s));
@@ -33,7 +33,8 @@ namespace BookingSystemGym
 
             foreach (string s in eq)
             {
-                UserList.Add(new User());
+                string[] sa = s.Split(',');
+                UserList.Add(new User(sa[0], sa[1], sa[2]));
             }
 
 
