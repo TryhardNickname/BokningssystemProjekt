@@ -53,7 +53,7 @@ namespace BookingSystemGym
             List<string> Save = new List<string>();
             foreach (var activity in Schedule)
             {
-                Save.Add($"{activity.Type};{activity.ScheduledTime};{activity.Room};{/*activity.Trainer*/}");
+                Save.Add($"{activity.Type};{activity.ScheduledTime};{activity.Room};"); //{ activity.Trainer}
             }
             //File.WriteAllLines(scheduleFile, Save);
         }
