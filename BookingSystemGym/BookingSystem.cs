@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Reflection;
 
 namespace BookingSystemGym
 {
@@ -43,9 +44,9 @@ namespace BookingSystemGym
 
         public void CreateSchedule()
         {
-            List<Activity> Schedule = new List<Activity>();
-            //Activity act = new Activity(inputType, inputTime, inputRoom, inputTrainer);
-            //Schedule.Add(act);
+            Schedule = new List<Activity>();
+            Activity act = new Activity(1, new DateTime(2021, 03, 10), 20, "gym", "big room", 1337);
+            Schedule.Add(act);
         }
 
         public void SaveSchedule()
@@ -118,25 +119,67 @@ namespace BookingSystemGym
 
         public void ChangeActivity(User user)
         {
-            string[] propertiesToChange = new string[] { "SessionLength", "ScheduledTime", "MaxParticipants", 
-                                                         "BookedParticipants", "Type", "Room", "Id" };
             if (user.Role == "emp" || user.Role == "admin")
             {
+
                 for (int i = 0; i < Schedule.Count; i++)
-                {
-                    //Kanske måste fixa ett namn för varje aktivitet? blir träligt att välja bland siffror tänker jag.
+                { 
                     Console.WriteLine($"{i + 1}. {Schedule[i].Id}");
                 }
                 int userInputWhichActivity = int.Parse(Console.ReadLine()) - 1;
 
-                for (int i = 0; i < propertiesToChange.Length; i++)
-                {
-                    Console.WriteLine($"{i + 1}. {propertiesToChange[i]}");
+                int index = 0;
+                foreach (Activity a in Schedule)
+                {          
+                    if (userInputWhichActivity == a.Id)
+                    {
+                        break;
+                    }
+                    index++;
                 }
+
+                Console.WriteLine($"1. Session Length: {Schedule[index].SessionLength}");
+                Console.WriteLine($"2. Scheduled Time: {Schedule[index].ScheduledTime}");
+                Console.WriteLine($"3. Max Participants: {Schedule[index].MaxParticipants}");
+                Console.WriteLine($"4. Booked Participants: {Schedule[index].BookedParticipants}");
+                Console.WriteLine($"5. Type: {Schedule[index].Type}");
+                Console.WriteLine($"6. Room: {Schedule[index].Room}");
+                Console.WriteLine($"7. Id: {Schedule[index].Id}");
+                Console.WriteLine($"8. Trainer: {Schedule[index].Trainer}");
                 int userInputWhichProp = int.Parse(Console.ReadLine()) - 1;
-                                                //userInputWhichProp
-                Schedule[userInputWhichActivity].UpdateActivity();
+
+                Schedule[index].UpdateActivity(userInputWhichProp);
+
+                switch (userInputWhichProp)
+                {
+                    case 1:
+                        Console.WriteLine($"New Session Length: {Schedule[index].SessionLength}");
+                        break;
+                    case 2:
+                        Console.WriteLine($"New Scheduled Time: {Schedule[index].ScheduledTime}");
+                        break;
+                    case 3:
+                        Console.WriteLine($"New Max Participants: {Schedule[index].ScheduledTime}");
+                        break;
+                    case 4:
+                        Console.WriteLine($"New Booked Participants: {Schedule[index].ScheduledTime}");
+                        break;
+                    case 5:
+                        Console.WriteLine($"New Type: {Schedule[index].Type}");
+                        break;
+                    case 6:
+                        Console.WriteLine($"New Room: {Schedule[index].Room}");
+                        break;
+                    case 7:
+                        Console.WriteLine($"New Id: {Schedule[index].Id}");
+                        break;
+                    case 8:
+                        Console.WriteLine($"New Trainer: {Schedule[index].Trainer}");
+                        break;
+                }
+                Console.WriteLine();
             }
+            
         }
 
         public void LogIn()
