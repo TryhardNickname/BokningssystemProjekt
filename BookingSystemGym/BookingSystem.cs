@@ -97,6 +97,7 @@ namespace BookingSystemGym
             }
         }
         
+        //Show all avtivitys of a specific type (users select)
         public List<Activity> ShowType(string op)
         {
             List<Activity> sortedList = new List<Activity>();
@@ -138,6 +139,42 @@ namespace BookingSystemGym
                 }
             }
             return sortedList.ToList();
+        }
+
+        //Show all activitys where the trainers name is input
+        public List<Activity> ShowTrainer(string op)
+        {
+            List<Activity> sortedList = new List<Activity>();
+            var sort = Schedule.Where(s => s.Trainer == op);
+
+            foreach (var item in sort)
+            {
+                sortedList.Add(item);
+            }
+
+            return sortedList.ToList();
+        }
+
+        //ScheduledTime prop privare??
+        public List<Activity> ShowTime(string time) //MM/DD/YYYY HH:MM
+        {
+            List<Activity> sortedList = new List<Activity>();
+
+            var sort = Schedule.Where(s => s.ScheduledTime.ToString() == time);
+            foreach (var item in sort)
+            {
+                if (item.ScheduledTime.ToString() == time)
+                {
+                    sortedList.Add(item);
+                }
+            }
+            return sortedList.ToList();
+        }
+
+        //Show all activitys in the schedule
+        public List<Activity> ShowAllInSchedule()
+        {
+            return Schedule.OrderBy(s => s.ScheduledTime.ToString()).ToList();
         }
 
         public string ShowBrokenEquip()
