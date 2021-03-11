@@ -35,6 +35,7 @@ namespace BookingSystemGym
                     if (bs.LogIn(id))
                     {
                         //next menu bokningen 
+                        break;
                     }
                     else
                     {
@@ -59,37 +60,81 @@ namespace BookingSystemGym
 
                     if(userInput == "2")
                     {
+                        //namn
+                        Console.WriteLine("skriv ditt namn: ");
+                        string name = Console.ReadLine();
+                        //roll
+                        Console.WriteLine("skriv din roll: "); //??rimlig fråga?
+                        string role = Console.ReadLine();
+                        Console.WriteLine("välj ditt medlems-id[nnnnn]: "); //ge random? kolla igenom userlist och ge nästa? välja själv? felhantering?
+                        string newId = Console.ReadLine();
+
+                        //new user is added to UserList, and is set as CurrentUser
+                        bs.Register(newId, role, name);
+                        //gå till nästa meny
+
 
                     }
+                }
+            }
+
+            //next menu!!!
+            
+
+
+            while (true)
+            {
+
+                int choices = PrintMenu(bs);
+
+                Console.WriteLine("input choice: ");
+                userInput = GetMenuInput(choices);
+
+                //exit
+                if (userInput == "0")
+                    break;
+
+                //1. Se Bokningsschemat
+                if (userInput == "1")
+                {
+                    string schedule = bs.ShowSchedule();
+                    Console.WriteLine(schedule);
+                    //välj dag? / tid? pass?
+                }
+                //2. Se trasiga maskiner
+                if (userInput == "2")
+                {
+                    string bi = bs.ShowBrokenEquip();
+                    Console.WriteLine(bi);
+                }
+                //3. Boka Pass,PT...
+                if (userInput == "3")
+                {
+                    // vilket sorts pass vill du boka?
+                    //<<PTpass
+                    //lista över pt pass, välj ett
+                    //bs.CurrentUser.MakeReservation()
+                }
+                //4. Ange trasig maskin
+                if (userInput == "4")
+                {
+                    //
+                }
+                //5. Gör ändring i bokningsschemat
+                if (userInput == "5")
+                {
+                    //
+                }
+                //6. Skapa nytt bokningsschema
+                if(userInput == "6")
+                {
+                    //load new textfile ?
                 }
 
             }
 
 
-            
-            
-            
-            //while (userInput != "0")
-            //{
-            //    Console.WriteLine("input choice: ");
-            //    userInput = Console.ReadLine();
-
-            //    if (userInput == "2")
-            //    {
-            //        string schedule = bs.ShowSchedule();
-            //        Console.WriteLine(schedule);
-            //    }
-            //    if (userInput == "3")
-            //    {
-            //        string bi = bs.ShowBrokenEquip();
-            //        Console.WriteLine(bi);
-            //    }
-
-                
-            //}
-
-
-
+            Console.WriteLine("Hej då!");
             Console.ReadKey();
 
         }
@@ -97,9 +142,9 @@ namespace BookingSystemGym
         static void PrintLogInMenu()
         {
             Console.WriteLine("**Hej Och välkomna till BokningsSystemet**");
-            Console.WriteLine("1 Logga in");
-            Console.WriteLine("2 Registrera ny användare");
-            Console.WriteLine("0 Exit");
+            Console.WriteLine("1. Logga in");
+            Console.WriteLine("2. Registrera ny användare");
+            Console.WriteLine("0. Exit");
         }
 
         //felhantering basic
@@ -114,12 +159,37 @@ namespace BookingSystemGym
                     return userInput;
                 }
                 Console.WriteLine("Fel input, försök igen: ");
+                userInput = Console.ReadLine();
             }
         }
 
         static void RegisterNewUser()
         {
 
+        }
+
+        static int PrintMenu(BookingSystem bs)
+        {
+            Console.WriteLine("**Välkommen till bokningen!**");
+            Console.WriteLine("1. Se Bokningsschemat");
+            Console.WriteLine("2. Se trasiga maskiner");
+            Console.WriteLine("3. Boka Pass,PT...");
+            if (bs.CurrentUser.Role != "user")
+            {
+                Console.WriteLine("4. Ange trasig maskin");
+                Console.WriteLine("5. Gör ändring i bokningsschemat");
+
+                if(bs.CurrentUser.Role == "admin")
+                {
+                    Console.WriteLine("6. Skapa nytt bokningsschema");
+                    Console.WriteLine("0. Logga ut");
+                    return 6;
+                }
+                Console.WriteLine("0. Logga ut");
+                return 5;
+            }
+            Console.WriteLine("0. Logga ut");
+            return 4;
         }
     }
 }

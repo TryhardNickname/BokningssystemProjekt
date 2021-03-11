@@ -27,7 +27,9 @@ namespace BookingSystemGym
             a.BookedParticipants += 1;
         }
 
-
+        enum EnumRole{
+            admin,emp,user
+        }
 
     }
 }
