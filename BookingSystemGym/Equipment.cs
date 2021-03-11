@@ -20,5 +20,10 @@ namespace BookingSystemGym
             Id = id;
             Name = name;
         }
+
+        public void ChangeStatus()
+        {
+            Broken = !Broken;
+        }
     }
 }
