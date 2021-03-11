@@ -19,7 +19,7 @@ namespace BookingSystemGym
             Name = name;
         }
 
-        public void MakeReservation(ref Activity a)
+        public void MakeReservation(Activity a)
         {
             if (a.BookedParticipants == a.MaxParticipants)
                 Console.WriteLine("could not book"); // felmeddelanden?
