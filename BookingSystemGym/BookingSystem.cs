@@ -15,6 +15,7 @@ namespace BookingSystemGym
         public List<Activity> Schedule { get; set; }
         public List<User> UserList { get; set; }
         public User CurrentUser { get; set; }
+        string scheduleFile = (@"../../scheduleFile.txt");
 
         public BookingSystem()
         {
@@ -37,9 +38,15 @@ namespace BookingSystemGym
                 UserList.Add(new User(usr[0], usr[1], usr[2]));
             }
 
+            Schedule = new List<Activity>();
+            string[] scheduleFromFile = File.ReadAllLines(scheduleFile);
 
             //get schedule
-
+            foreach (string line in scheduleFromFile)
+            {
+                string[] activity = line.Split(';');
+                Schedule.Add(new Activity(activity));
+            }
             //LogIn();
         }
 
@@ -89,13 +96,42 @@ namespace BookingSystemGym
                 //}
             }
         }
+        
         public List<Activity> ShowType(string op)
         {
             List<Activity> sortedList = new List<Activity>();
 
-            if (op == "gym")
+            //training by your own - gym
+            if (op == "1")
             {
-                var sort = Schedule.Where(s1 => s1.Type == "gym");
+                var sort = Schedule.Where(s1 => s1.Type == "gym training");
+                foreach (var item in sort)
+                {
+                    sortedList.Add(item);
+                }
+            }
+            //training in a group
+            else if (op == "2")
+            {
+                var sort = Schedule.Where(s1 => s1.Type == "group training");
+                foreach (var item in sort)
+                {
+                    sortedList.Add(item);
+                }
+            }
+            //training with PT
+            else if (op == "3")
+            {
+                var sort = Schedule.Where(s1 => s1.Type == "pt training");
+                foreach (var item in sort)
+                {
+                    sortedList.Add(item);
+                }
+            }
+            //consulting with PT
+            else if (op == "4")
+            {
+                var sort = Schedule.Where(s1 => s1.Type == "pt consulting");
                 foreach (var item in sort)
                 {
                     sortedList.Add(item);

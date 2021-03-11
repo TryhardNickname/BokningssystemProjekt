@@ -96,10 +96,13 @@ namespace BookingSystemGym
                 if (userInput == "1")
                 {
                     Console.WriteLine("1. Sök efter pass 2. Sök efter tid/dag? 3. Sök tränare 4. Visa alla pass");
-                   string input = Console.ReadLine();
+                    string input = Console.ReadLine();
                     if (input == "1")
                     {
-                        var ST = bs.ShowType("pt");
+                        Console.WriteLine("1. Sök på gym\n2. Sök på gruppträning\n3. Sök på träning med PT\n4. Sök på konsultation med PT");
+                        input = Console.ReadLine().ToLower();
+
+                        var ST = bs.ShowType(input);
                         foreach (var item in ST)
                         {
                             Console.WriteLine($"Rum: {item.Room}\n Id:{item.Id}");
@@ -107,8 +110,8 @@ namespace BookingSystemGym
                             Console.WriteLine();
                         }
                     }
-                    string schedule = bs.ShowSchedule();
-                    Console.WriteLine(schedule);
+                    //string schedule = bs.ShowSchedule();
+                    //Console.WriteLine(schedule);
                     //välj dag? / tid? pass?
                 }
                 //2. Se trasiga maskiner

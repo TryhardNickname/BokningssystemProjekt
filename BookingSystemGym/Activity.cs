@@ -29,6 +29,18 @@ namespace BookingSystemGym
             Trainer = trainer;
         }
 
+        public Activity(string[] lineFromFile)
+        {
+            SessionLength = int.Parse(lineFromFile[0]);
+            ScheduledTime = DateTime.Parse(lineFromFile[1]);
+            MaxParticipants = int.Parse(lineFromFile[2]);
+            BookedParticipants = 0;
+            Type = lineFromFile[4];
+            Room = lineFromFile[5];
+            Id = int.Parse(lineFromFile[6]);
+            Trainer = lineFromFile[7];
+        }
+
 
         public void UpdateActivity(int PropToChange)
         {
