@@ -35,10 +35,10 @@ namespace BookingSystemGym
             ScheduledTime = DateTime.Parse(lineFromFile[1]);
             MaxParticipants = int.Parse(lineFromFile[2]);
             BookedParticipants = 0;
-            Type = lineFromFile[4];
-            Room = lineFromFile[5];
-            Id = int.Parse(lineFromFile[6]);
-            Trainer = lineFromFile[7];
+            Type = lineFromFile[3];
+            Room = lineFromFile[4];
+            Id = int.Parse(lineFromFile[5]);
+            Trainer = lineFromFile[6];
         }
 
 
@@ -47,6 +47,18 @@ namespace BookingSystemGym
 
             switch (PropToChange)
             {
+                case 5:
+                    string newType = Console.ReadLine();
+                    this.Type = newType;
+                    break;  // In Bookingsystem, print the new value of Type
+                case 6:
+                    string newRoom = Console.ReadLine();
+                    this.Room = newRoom;
+                    break;  // In Bookingsystem, print the new value of Room
+                case 8:
+                    string newTrainer = Console.ReadLine();
+                    this.Trainer = newTrainer;
+                    break;  // In Bookingsystem, print the new value of Trainer
                 case 1:
                     int newSessionLength = int.Parse(Console.ReadLine());
                     this.SessionLength = newSessionLength;
@@ -63,23 +75,13 @@ namespace BookingSystemGym
                     int newBookedParticipants = int.Parse(Console.ReadLine());
                     this.BookedParticipants = newBookedParticipants;
                     break;  // In Bookingsystem, print the new value of BookedParticipants
-                case 5:
-                    string newType = Console.ReadLine();
-                    this.Type = newType;
-                    break;  // In Bookingsystem, print the new value of Type
-                case 6:
-                    string newRoom = Console.ReadLine();
-                    this.Room = newRoom;
-                    break;  // In Bookingsystem, print the new value of Room
                 case 7:
                     int newId = int.Parse(Console.ReadLine());
                     this.Id = newId;
                     break;  // In Bookingsystem, print the new value of Id
-                case 8:
-                    string newTrainer = Console.ReadLine();
-                    this.Trainer = newTrainer;
-                    break;  // In Bookingsystem, print the new value of Trainer
             }
+
+            
 
             
         }
