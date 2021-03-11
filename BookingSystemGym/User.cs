@@ -8,9 +8,9 @@ namespace BookingSystemGym
 {
     class User
     {
-        public string Id { get; set; }
-        public string Role { get; set; }
-        public string Name { get; set; }
+        public string Id { get; private set; }
+        public string Role { get; private set; }
+        public string Name { get; private set; }
 
         public User(string id, string role, string name)
         {

@@ -78,10 +78,8 @@ namespace BookingSystemGym
                 }
             }
 
+
             //next menu!!!
-            
-
-
             while (true)
             {
 
@@ -123,6 +121,8 @@ namespace BookingSystemGym
                 //5. Gör ändring i bokningsschemat
                 if (userInput == "5")
                 {
+                    //välj activitet och sen:
+                    //changeactivity()?
                     //
                 }
                 //6. Skapa nytt bokningsschema
@@ -165,7 +165,7 @@ namespace BookingSystemGym
 
         static void RegisterNewUser()
         {
-
+            
         }
 
         static int PrintMenu(BookingSystem bs)
