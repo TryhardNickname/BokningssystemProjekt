@@ -1,4 +1,4 @@
-2;04/02/2021 12:00;30;group training;room 4;1234;Robert Gustavsson
-1;05/01/2021 13:30;25;pt training;room 5;4321;Britt Marie Larsson
-2;06/05/2021 14:00;25;pt consulting;room 6;5678;Lars Åke Bobsson
-1;07/12/2021 17:00;30;gym training;room 7;8765;Susanna Lund
+2;04/02/2021 12:00;30;Group Training;room 4;1234;Robert Gustavsson
+1;05/01/2021 13:30;25;PT Training;room 5;4321;Britt Marie Larsson
+2;06/05/2021 14:00;25;PT Consulting;room 6;5678;Lars Åke Bobsson
+1;07/12/2021 17:00;30;Gym Training;room 7;8765;Susanna Lund
