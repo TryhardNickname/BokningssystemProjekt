@@ -53,7 +53,7 @@ namespace BookingSystemGym
         public void CreateSchedule()
         {
             Schedule = new List<Activity>();
-            Activity act = new Activity(1, new DateTime(2021, 03, 10), 20, "gym", "big room", 1337, "Anna Anderson");
+            Activity act = new Activity(1, new DateTime(2021, 03, 10), 20, "Gym Training", "big room", 1337, "Anna Anderson");
             Schedule.Add(act);
         }
 
