@@ -95,6 +95,18 @@ namespace BookingSystemGym
                 //1. Se Bokningsschemat
                 if (userInput == "1")
                 {
+                    Console.WriteLine("1. Sök efter pass 2. Sök efter tid/dag? 3. Sök tränare 4. Visa alla pass");
+                   string input = Console.ReadLine();
+                    if (input == "1")
+                    {
+                        var ST = bs.ShowType("pt");
+                        foreach (var item in ST)
+                        {
+                            Console.WriteLine($"Rum: {item.Room}\n Id:{item.Id}");
+                            Console.WriteLine("------------------");
+                            Console.WriteLine();
+                        }
+                    }
                     string schedule = bs.ShowSchedule();
                     Console.WriteLine(schedule);
                     //välj dag? / tid? pass?

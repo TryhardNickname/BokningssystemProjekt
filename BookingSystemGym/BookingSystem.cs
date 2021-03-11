@@ -89,9 +89,19 @@ namespace BookingSystemGym
                 //}
             }
         }
-        public string ShowSchedule()
+        public List<Activity> ShowType(string op)
         {
-            return "";
+            List<Activity> sortedList = new List<Activity>();
+
+            if (op == "gym")
+            {
+                var sort = Schedule.Where(s1 => s1.Type == "gym");
+                foreach (var item in sort)
+                {
+                    sortedList.Add(item);
+                }
+            }
+            return sortedList.ToList();
         }
 
         public string ShowBrokenEquip()
