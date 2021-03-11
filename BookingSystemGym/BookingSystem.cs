@@ -15,7 +15,7 @@ namespace BookingSystemGym
         public List<Activity> Schedule { get; set; }
         public List<User> UserList { get; set; }
         public User CurrentUser { get; set; }
-
+        string scheduleFile = (@"../../scheduleFile.txt");
         public BookingSystem()
         {
             //get list of equipments?
@@ -45,9 +45,13 @@ namespace BookingSystemGym
 
         public void CreateSchedule()
         {
-            Schedule = new List<Activity>();
-            Activity act = new Activity(1, new DateTime(2021, 03, 10), 20, "gym", "big room", 1337, "Anna Anderson");
-            Schedule.Add(act);
+            if (CurrentUser.Role != "Admin")
+            {
+                Schedule = new List<Activity>();
+                Activity act = new Activity(1, new DateTime(2021, 03, 10), 20, "gym", "big room", 1337, "Anna Anderson");
+                Schedule.Add(act);
+                SaveSchedule();
+            }
         }
 
         public void SaveSchedule()
@@ -55,20 +59,19 @@ namespace BookingSystemGym
             List<string> Save = new List<string>();
             foreach (var activity in Schedule)
             {
-                Save.Add($"{activity.Type};{activity.ScheduledTime};{activity.Room};"); //{ activity.Trainer}
+                Save.Add($"{activity.SessionLength};{activity.ScheduledTime};{activity.MaxParticipants};{activity.Type};{activity.Room};{activity.Id};{activity.Trainer}");
             }
-            //File.WriteAllLines(scheduleFile, Save);
+            File.WriteAllLines(scheduleFile, Save);
         }
 
-        public void AddToSchedule(Activity a)
+        public void AddToSchedule(int sesLength, DateTime time, int max, string type, string room, int id, string trainer)
         {
-            if (CurrentUser.Role == "Admin")
+            string addToFile = $"{sesLength};{time};{max};{type};{room};{id};{trainer}";
+            Activity newActivity = new Activity(sesLength, time, max, type, room, id, trainer);
+            if (CurrentUser.Role == "Admin" || CurrentUser.Role == "Employee")
             {
-                Schedule.Add(a);
-            }
-            else
-            {
-                //"you dont have premission"
+                Schedule.Add(newActivity);
+                File.AppendAllText(scheduleFile, addToFile);
             }
         }
 
@@ -76,9 +79,12 @@ namespace BookingSystemGym
         {
             if (CurrentUser.Role == "Admin")
             {
-                if (Schedule.Remove(a))
+                foreach (Activity b in Schedule)
                 {
-                    //skicka meddelande "a är borttaget"
+                    if (a.Id == b.Id)
+                    {
+                        Schedule.Remove(b);
+                    }
                 }
                 //foreach (Activity b in Schedule)
                 //{
