@@ -28,7 +28,7 @@ namespace BookingSystemGym
                 //logga in 
                 if (userInput == "1")
                 {
-                    Console.WriteLine("Ange ditt medlems-id[nnnnn]: ");
+                    Console.WriteLine("Ange ditt medlems-id[nnnn]: ");
                     string id = Console.ReadLine(); //lägg till felhantering
                     
 
@@ -103,12 +103,17 @@ namespace BookingSystemGym
                         input = Console.ReadLine().ToLower();
 
                         var ST = bs.ShowType(input);
+                        int activityCount = 0;
                         foreach (var item in ST)
                         {
-                            Console.WriteLine($"Rum: {item.Room}\n Id:{item.Id}");
+                            Console.WriteLine($"Rum: {item.Room}\nId:{item.Id}");
                             Console.WriteLine("------------------");
                             Console.WriteLine();
+                            activityCount++;
                         }
+                        Console.WriteLine("");
+                        input = Console.ReadLine();
+
                     }
                     //string schedule = bs.ShowSchedule();
                     //Console.WriteLine(schedule);

@@ -104,7 +104,7 @@ namespace BookingSystemGym
             //training by your own - gym
             if (op == "1")
             {
-                var sort = Schedule.Where(s1 => s1.Type == "gym training");
+                var sort = Schedule.Where(s1 => s1.Type == "Gym Training");
                 foreach (var item in sort)
                 {
                     sortedList.Add(item);
@@ -113,7 +113,7 @@ namespace BookingSystemGym
             //training in a group
             else if (op == "2")
             {
-                var sort = Schedule.Where(s1 => s1.Type == "group training");
+                var sort = Schedule.Where(s1 => s1.Type == "Group Training");
                 foreach (var item in sort)
                 {
                     sortedList.Add(item);
@@ -122,7 +122,7 @@ namespace BookingSystemGym
             //training with PT
             else if (op == "3")
             {
-                var sort = Schedule.Where(s1 => s1.Type == "pt training");
+                var sort = Schedule.Where(s1 => s1.Type == "PT Training");
                 foreach (var item in sort)
                 {
                     sortedList.Add(item);
@@ -131,7 +131,7 @@ namespace BookingSystemGym
             //consulting with PT
             else if (op == "4")
             {
-                var sort = Schedule.Where(s1 => s1.Type == "pt consulting");
+                var sort = Schedule.Where(s1 => s1.Type == "PT Consulting");
                 foreach (var item in sort)
                 {
                     sortedList.Add(item);
@@ -154,7 +154,7 @@ namespace BookingSystemGym
         //variant 1
         public void ChangeEquipmentStatus(User user, Equipment equipment)
         {
-            if (user.Role == "emp" || user.Role == "admin")
+            if (user.Role == "Employee" || user.Role == "Admin")
             {
                 equipment.Broken = !equipment.Broken;
             }
@@ -163,7 +163,7 @@ namespace BookingSystemGym
         //variant 2
         public void ChangeEquipmentStatus(User user)
         {
-            if (user.Role == "emp" || user.Role == "admin")
+            if (user.Role == "Employee" || user.Role == "Admin")
             {
                 for (int i = 0; i < Equipments.Count; i++)
                 {
@@ -177,7 +177,7 @@ namespace BookingSystemGym
 
         public void ChangeActivity(User user)
         {
-            if (user.Role == "emp" || user.Role == "admin")
+            if (user.Role == "Employee" || user.Role == "Admin")
             {
 
                 // skriv ut aktivitetens id och typ

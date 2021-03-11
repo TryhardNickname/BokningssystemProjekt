@@ -35,10 +35,10 @@ namespace BookingSystemGym
             ScheduledTime = DateTime.Parse(lineFromFile[1]);
             MaxParticipants = int.Parse(lineFromFile[2]);
             BookedParticipants = 0;
-            Type = lineFromFile[4];
-            Room = lineFromFile[5];
-            Id = int.Parse(lineFromFile[6]);
-            Trainer = lineFromFile[7];
+            Type = lineFromFile[3];
+            Room = lineFromFile[4];
+            Id = int.Parse(lineFromFile[5]);
+            Trainer = lineFromFile[6];
         }
 
 
