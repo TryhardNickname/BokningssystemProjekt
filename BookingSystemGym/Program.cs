@@ -155,7 +155,7 @@ namespace BookingSystemGym
                 if (userInput == "5")
                 {
                     //välj activitet och sen:
-                    //changeactivity()?
+                    bs.ChangeActivity(bs.CurrentUser);
                     //
                 }
                 //6. Skapa nytt bokningsschema

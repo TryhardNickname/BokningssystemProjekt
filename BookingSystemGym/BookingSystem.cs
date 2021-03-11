@@ -244,43 +244,67 @@ namespace BookingSystemGym
                 Console.WriteLine($"6. Room: {Schedule[index].Room}");
                 Console.WriteLine($"7. Id: {Schedule[index].Id}");
                 Console.WriteLine($"8. Trainer: {Schedule[index].Trainer}");
-                int userInputWhichProp = int.Parse(Console.ReadLine()) - 1;
+                int userInputWhichProp = int.Parse(Console.ReadLine());
 
-                Schedule[index].UpdateActivity(userInputWhichProp);
+                
 
                 // skriver ut värdet på propertyn man ändrade
                 // gör instruktioner
                 switch (userInputWhichProp)
                 {
                     case 1:
+                        Console.WriteLine("Ange den nya längden på passet");
+                        int newSessionLength = int.Parse(Console.ReadLine());
+                        Schedule[index].UpdateActivity(userInputWhichProp, newSessionLength);
                         Console.WriteLine($"New Session Length: {Schedule[index].SessionLength}");
                         break;
                     case 2:
+                        Console.WriteLine("Ange den nya tidpunkten för passet");
+                        DateTime newTime = DateTime.Parse(Console.ReadLine());
+                        Schedule[index].UpdateActivity(userInputWhichProp, newTime);
                         Console.WriteLine($"New Scheduled Time: {Schedule[index].ScheduledTime}");
                         break;
                     case 3:
-                        Console.WriteLine($"New Max Participants: {Schedule[index].ScheduledTime}");
+                        Console.WriteLine("Ange den nya maxgränsen för deltagare");
+                        int newMaxParticipants = int.Parse(Console.ReadLine());
+                        Schedule[index].UpdateActivity(userInputWhichProp, newMaxParticipants);
+                        Console.WriteLine($"New Max Participants: {Schedule[index].MaxParticipants}");
                         break;
                     case 4:
-                        Console.WriteLine($"New Booked Participants: {Schedule[index].ScheduledTime}");
+                        Console.WriteLine("Ange det nya antalet deltagare");
+                        int newBookedParticipants = int.Parse(Console.ReadLine());
+                        Schedule[index].UpdateActivity(userInputWhichProp, newBookedParticipants);
+                        Console.WriteLine($"New Booked Participants: {Schedule[index].BookedParticipants}");
                         break;
                     case 5:
+                        Console.WriteLine("Ange den nya typen av träning");
+                        string newType = Console.ReadLine();
+                        Schedule[index].UpdateActivity(userInputWhichProp, newType);
                         Console.WriteLine($"New Type: {Schedule[index].Type}");
                         break;
                     case 6:
+                        Console.WriteLine("Ange det nya rummet för passet");
+                        string newRoom = Console.ReadLine();
+                        Schedule[index].UpdateActivity(userInputWhichProp, newRoom);
                         Console.WriteLine($"New Room: {Schedule[index].Room}");
                         break;
                     case 7:
+                        Console.WriteLine("Ange det nya ID:t för passet");
+                        int newId = int.Parse(Console.ReadLine());
+                        Schedule[index].UpdateActivity(userInputWhichProp, newId);
                         Console.WriteLine($"New Id: {Schedule[index].Id}");
                         break;
                     case 8:
+                        Console.WriteLine("Ange den nya tränaren för passet");
+                        string newTrainer = Console.ReadLine();
+                        Schedule[index].UpdateActivity(userInputWhichProp, newTrainer);
                         Console.WriteLine($"New Trainer: {Schedule[index].Trainer}");
                         break;
                 }
+                Console.WriteLine("\n");
             }
             
         }
-
         //returns true if succesful
         public bool LogIn(string inputId)
         {
