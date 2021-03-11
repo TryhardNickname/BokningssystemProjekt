@@ -39,39 +39,19 @@ namespace BookingSystemGym
                     }
                     else
                     {
-                        Console.WriteLine("medlems id saknas, vill du registrera dig?");
+                        Console.WriteLine("Medlems-Id saknas, vill du registrera dig?");
                         string yesorno = Console.ReadLine(); // lägg till felhantering
                         if (yesorno == "yes")
                         {
-                            //namn
-                            Console.WriteLine("skriv ditt namn: ");
-                            string name = Console.ReadLine();
-                            //roll
-                            Console.WriteLine("skriv din roll: "); //??rimlig fråga?
-                            string role = Console.ReadLine();
-                            Console.WriteLine("välj ditt medlems-id[nnnnn]: "); //ge random? kolla igenom userlist och ge nästa? välja själv? felhantering?
-                            string newId = Console.ReadLine();
 
-                            //new user is added to UserList, and is set as CurrentUser
-                            bs.Register(newId, role, name);
-                            //gå till nästa meny
+                            RegisterNewUser(bs);
+
                         }
                     }
 
                     if(userInput == "2")
                     {
-                        //namn
-                        Console.WriteLine("skriv ditt namn: ");
-                        string name = Console.ReadLine();
-                        //roll
-                        Console.WriteLine("skriv din roll: "); //??rimlig fråga?
-                        string role = Console.ReadLine();
-                        Console.WriteLine("välj ditt medlems-id[nnnnn]: "); //ge random? kolla igenom userlist och ge nästa? välja själv? felhantering?
-                        string newId = Console.ReadLine();
-
-                        //new user is added to UserList, and is set as CurrentUser
-                        bs.Register(newId, role, name);
-                        //gå till nästa meny
+                        RegisterNewUser(bs);
 
 
                     }
@@ -116,7 +96,12 @@ namespace BookingSystemGym
                 //4. Ange trasig maskin
                 if (userInput == "4")
                 {
-                    //
+                    string bi = bs.ShowBrokenEquip();
+                    Console.WriteLine(bi);
+                    Console.WriteLine("Ange vilken maskin du vill ändra[index]: ");
+                    userInput = Console.ReadLine();
+
+                    bs.ChangeEquipmentStatus(bs.CurrentUser, bs.Equipments[int.Parse(userInput)]);
                 }
                 //5. Gör ändring i bokningsschemat
                 if (userInput == "5")
@@ -163,9 +148,21 @@ namespace BookingSystemGym
             }
         }
 
-        static void RegisterNewUser()
+        static void RegisterNewUser(BookingSystem bs)
         {
+           
+            Console.WriteLine("Skriv ditt namn: ");
+            string name = Console.ReadLine();
             
+            // Här kan vi göra på ett bättre sätt
+            Console.WriteLine("Skriv din roll[Employee/GymUser/Admin ]: "); 
+            string role = Console.ReadLine();
+            Console.WriteLine("välj ditt medlems-id[nnnn]: "); //ge random? kolla igenom userlist och ge nästa? välja själv? felhantering?
+            string newId = Console.ReadLine();
+
+            //new user is added to UserList, and is set as CurrentUser
+            bs.Register(newId, role, name);
+            //gå till nästa meny
         }
 
         static int PrintMenu(BookingSystem bs)
