@@ -28,7 +28,7 @@ namespace BookingSystemGym
                 //logga in 
                 if (userInput == "1")
                 {
-                    Console.WriteLine("Ange ditt medlems-id[nnnnn]: ");
+                    Console.WriteLine("Ange ditt medlems-id[nnnn]: ");
                     string id = Console.ReadLine(); //lägg till felhantering
                     
 
@@ -85,7 +85,7 @@ namespace BookingSystemGym
 
                 int choices = PrintMenu(bs);
 
-                Console.WriteLine("input choice: ");
+                Console.Write("Ange val: ");
                 userInput = GetMenuInput(choices);
 
                 //exit
@@ -95,20 +95,38 @@ namespace BookingSystemGym
                 //1. Se Bokningsschemat
                 if (userInput == "1")
                 {
-                    Console.WriteLine("1. Sök efter pass 2. Sök efter tid/dag? 3. Sök tränare 4. Visa alla pass");
+                    Console.WriteLine("1. Sök efter pass\n2. Sök efter tid/dag?\n3. Sök tränare\n4. Visa alla pass");
                     string input = Console.ReadLine();
                     if (input == "1")
                     {
                         Console.WriteLine("1. Sök på gym\n2. Sök på gruppträning\n3. Sök på träning med PT\n4. Sök på konsultation med PT");
-                        input = Console.ReadLine().ToLower();
+                        input = Console.ReadLine().ToLower(); 
 
-                        var ST = bs.ShowType(input);
+                        List<Activity> ST = bs.ShowType(input);
+                        int activityCount = 1;
                         foreach (var item in ST)
                         {
-                            Console.WriteLine($"Rum: {item.Room}\n Id:{item.Id}");
+                            Console.WriteLine($"{activityCount}. Passets längd: {item.SessionLength} timmar\nStarttid: " +
+                                              $"{item.ScheduledTime}\nMax antal deltagare: {item.MaxParticipants}\n" +
+                                              $"Platser kvar: {item.MaxParticipants - item.BookedParticipants}\n" +
+                                              $"Typ av träning: {item.Type}\nPlats: {item.Room}\nTränare: {item.Trainer}");
                             Console.WriteLine("------------------");
                             Console.WriteLine();
+                            activityCount++;
                         }
+
+                        Console.WriteLine("Ange vilket pass du vill boka en plats i: (0 för att gå tillbaks)");
+                        input = Console.ReadLine();
+                        if (input == 0.ToString())
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            bs.CurrentUser.MakeReservation(ST[activityCount - 1]);
+                        }
+                        
+
                     }
                     //string schedule = bs.ShowSchedule();
                     //Console.WriteLine(schedule);
