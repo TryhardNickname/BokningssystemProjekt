@@ -8,18 +8,27 @@ namespace BookingSystemGym
 {
     class User
     {
-        public int Id { get; set; }
-        public string Role { get; set; }
-        public string Name { get; set; }
+        public string Id { get; private set; }
+        public string Role { get; private set; }
+        public string Name { get; private set; }
 
-        public User()
+        public User(string id, string role, string name)
         {
-
+            Id = id;
+            Role = role;
+            Name = name;
         }
 
-        public void MakeReservation(Activity a)
+        public void MakeReservation(ref Activity a)
         {
+            if (a.BookedParticipants == a.MaxParticipants)
+                Console.WriteLine("could not book"); // felmeddelanden?
+
             a.BookedParticipants += 1;
+        }
+
+        enum EnumRole{
+            admin,emp,user
         }
 
     }

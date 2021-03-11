@@ -1,0 +1,4 @@
+0001,user,Samuel
+0002,user,Linda
+0003,emp,Dmitri
+0004,admin,Al-Hussein
