@@ -41,15 +41,12 @@ namespace BookingSystemGym
             Schedule = new List<Activity>();
             string[] scheduleFromFile = File.ReadAllLines(scheduleFile);
 
+            //get schedule
             foreach (string line in scheduleFromFile)
             {
                 string[] activity = line.Split(';');
-                Schedule.Add(new Activity(int.Parse(activity[0]), DateTime.Parse(activity[1]), int.Parse(activity[2]), 
-                                                    activity[3], activity[4], int.Parse(activity[5]), activity[6]));
+                Schedule.Add(new Activity(activity));
             }
-
-            //get schedule
-
             //LogIn();
         }
 
