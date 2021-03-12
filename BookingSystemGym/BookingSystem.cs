@@ -167,12 +167,12 @@ namespace BookingSystemGym
         public List<Activity> ShowTime(string time) //MM/DD/YYYY HH:MM
         {
             List<Activity> sortedList = new List<Activity>();
-            string hej = Schedule[0].ScheduledTime.ToString("yyyy-MM-dd HH:mm");
+            string hej = Schedule[0].ScheduledTime.ToString("yyyy-MM-dd");
 
-            var sort = Schedule.Where(s => s.ScheduledTime.ToString("yyyy-MM-dd HH:mm") == time);
+            var sort = Schedule.Where(s => s.ScheduledTime.ToString("yyyy-MM-dd") == time);
             foreach (var item in sort)
             {
-                if (item.ScheduledTime.ToString("yyyy-MM-dd HH:mm") == time)
+                if (item.ScheduledTime.ToString("yyyy-MM-dd") == time)
                 {
                     sortedList.Add(item);
                 }
