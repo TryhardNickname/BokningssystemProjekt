@@ -17,6 +17,7 @@ namespace BookingSystemGym
             Id = id;
             Role = role;
             Name = name;
+
         }
 
         public void MakeReservation(Activity a)

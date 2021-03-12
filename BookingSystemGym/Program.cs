@@ -19,7 +19,6 @@ namespace BookingSystemGym
             while (true)
             {
                 PrintLogInMenu();
-
                 userInput = GetMenuInput(3);
 
                 //exit
@@ -30,12 +29,11 @@ namespace BookingSystemGym
                 if (userInput == "1")
                 {
                     Console.WriteLine("Ange ditt medlems-id[nnnn]: ");
-                    string id = Console.ReadLine(); //lägg till felhantering
-                    
+                    string id = GetMenuInput(9999);
 
                     if (bs.LogIn(id))
                     {
-                        //next menu bokningen 
+                        //next menu: bokningen 
                         break;
                     }
                     else
@@ -44,29 +42,26 @@ namespace BookingSystemGym
                         string yesorno = Console.ReadLine(); // lägg till felhantering
                         if (yesorno == "yes")
                         {
-
                             RegisterNewUser(bs);
-
+                            break;
                         }
                     }
-
-                    if(userInput == "2")
-                    {
-                        RegisterNewUser(bs);
-
-
-                    }
+                if(userInput == "2")
+                {
+                    RegisterNewUser(bs);
+                    break;
+                }
                 }
             }
+            Console.Clear();
 
 
-            //next menu!!!
+            //booking-menu
             while (true)
             {
-
                 int choices = PrintMenu(bs);
 
-                Console.Write("Ange val: ");
+                Console.WriteLine("Ange val: ");
                 userInput = GetMenuInput(choices);
 
                 //exit
@@ -76,12 +71,19 @@ namespace BookingSystemGym
                 //1. Se Bokningsschemat
                 if (userInput == "1")
                 {
+                    Console.Clear();
+                    Console.WriteLine("*Bokningsschemat*");
                     Console.WriteLine("1. Sök efter pass\n2. Sök efter tid/dag?\n3. Sök tränare\n4. Visa alla pass");
+                    Console.Write(">");
                     string input = Console.ReadLine();
                     if (input == "1")
                     {
+                        Console.Clear();
+                        Console.WriteLine("*Pass-sökning*");
                         Console.WriteLine("1. Sök på gym\n2. Sök på gruppträning\n3. Sök på träning med PT\n4. Sök på konsultation med PT");
-                        input = Console.ReadLine().ToLower(); 
+                        Console.Write(">");
+                        input = Console.ReadLine().ToLower();
+                        Console.WriteLine();
 
                         List<Activity> ST = bs.ShowType(input);
                         int activityCount = 1;
@@ -100,7 +102,7 @@ namespace BookingSystemGym
                         input = Console.ReadLine();
                         if (input == "0")
                         {
-                            break;
+                            continue;
                         }
                         else
                         {
@@ -143,7 +145,6 @@ namespace BookingSystemGym
                 {
                     //välj activitet och sen:
                     bs.ChangeActivity(bs.CurrentUser);
-                    //
                 }
                 //6. Ladda upp nytt bokningsschema
                 if(userInput == "6")
@@ -174,15 +175,26 @@ namespace BookingSystemGym
         }
 
         //felhantering basic
-        static string GetMenuInput(int amoutOfChoices)
+        static string GetMenuInput(int amountOfChoices)
         {
+            Console.Write(">");
             string userInput = Console.ReadLine();
 
             while (true)
             {
-                if (int.Parse(userInput) < amoutOfChoices)
+                if (int.Parse(userInput) < amountOfChoices && int.Parse(userInput) >= 0) // && > 0
                 {
-                    return userInput;
+                    if (amountOfChoices != 9999)
+                    {
+                        return userInput;
+                    }
+                    else
+                    {
+                        if (userInput.Length == 4)
+                        {
+                            return userInput;
+                        }
+                    }
                 }
                 Console.WriteLine("Fel input, försök igen: ");
                 userInput = Console.ReadLine();
@@ -193,22 +205,25 @@ namespace BookingSystemGym
         {
            
             Console.WriteLine("Skriv ditt namn: ");
+            Console.Write(">");
             string name = Console.ReadLine();
-            
+
             // Här kan vi göra på ett bättre sätt
-            Console.WriteLine("Skriv din roll[Employee/GymUser/Admin ]: "); 
-            string role = Console.ReadLine();
+            //Console.WriteLine("Skriv din roll[Employee/GymUser/Admin]: "); 
+            //string role = Console.ReadLine();
+
+            Console.Write(">");
             Console.WriteLine("välj ditt medlems-id[nnnn]: "); //ge random? kolla igenom userlist och ge nästa? välja själv? felhantering?
             string newId = Console.ReadLine();
 
             //new user is added to UserList, and is set as CurrentUser
-            bs.Register(newId, role, name);
+            bs.Register(newId, "GymUser", name);
             //gå till nästa meny
         }
 
         static int PrintMenu(BookingSystem bs)
         {
-            Console.WriteLine("**Välkommen till bokningen!**");
+            Console.WriteLine($"**Välkommen till bokningen {bs.CurrentUser.Name}!**");
             Console.WriteLine("1. Se Bokningsschemat och boka pass");
             Console.WriteLine("2. Se trasiga maskiner");
             Console.WriteLine("3. Boka Pass,PT...");
