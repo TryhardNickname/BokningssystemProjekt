@@ -47,7 +47,7 @@ namespace BookingSystemGym
             {
                 Save.Add($"{user.Id};{user.Role};{user.Name}");
             }
-            File.WriteAllLines(equipmentsFile, Save);
+            File.WriteAllLines(userListFile, Save);
         }
 
         public void LoadEquipmentList()
@@ -96,7 +96,7 @@ namespace BookingSystemGym
             List<string> Save = new List<string>();
             foreach (var activity in Schedule)
             {
-                Save.Add($"{activity.Type};{activity.ScheduledTime};{activity.Room};{activity.Trainer}"); 
+                Save.Add($"{activity.SessionLength};{activity.ScheduledTime};{activity.MaxParticipants};{activity.Type};{activity.Room};{activity.Id};{activity.Trainer}");
             }
             File.WriteAllLines(scheduleFile, Save);
         }
@@ -206,7 +206,6 @@ namespace BookingSystemGym
         public List<Activity> ShowTime(string time) //MM/DD/YYYY HH:MM
         {
             List<Activity> sortedList = new List<Activity>();
-            string hej = Schedule[0].ScheduledTime.ToString("yyyy-MM-dd");
 
             var sort = Schedule.Where(s => s.ScheduledTime.ToString("yyyy-MM-dd") == time);
             foreach (var item in sort)

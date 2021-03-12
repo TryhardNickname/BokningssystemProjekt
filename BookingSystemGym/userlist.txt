@@ -2,3 +2,5 @@
 0002;GymUser;Linda
 0003;Employee;Dmitri
 0004;Admin;Al-Hussein
+ksfs;GymUser;Bullen
+asdf;GymUser;Bullen

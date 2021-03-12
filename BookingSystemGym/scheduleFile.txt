@@ -1,16 +1,16 @@
-2;04/02/2021 12:00;30;Gym Training;room 4;1234;Robert Gustavsson
-1;05/01/2021 13:30;25;Group Training;room 5;4321;Britt Marie Larsson
-2;06/05/2021 14:00;25;PT Training;room 6;5678;Lars Åke Bobsson
-1;07/12/2021 17:00;30;PT Consulting;room 7;8765;Susanna Lund
-3;04/02/2021 12:00;30;Gym Training;room 12;1369;Leif Åke
-1;08/03/2021 13:30;40;Group Training;room 13;2470;Britt Inger Persson
-2;11/05/2021 14:00;45;PT Training;room 14;3113;Konny Thorsson
-3;12/11/2021 17:00;25;PT Consulting;room 15;5476;Jessica Ulladottir
-2;01/02/2021 12:00;30;Gym Training;room 20;0110;Torvald Gunther
-3;02/03/2021 13:30;20;Gym Training;room 21;1337;Bruno Baguette
-1;05/05/2021 15:00;25;PT Training;room 22;8888;Poppy Pompös
-3;06/12/2021 18:00;15;PT Consulting;room 23;9999;Mundo Stark
-3;07/02/2021 12:00;30;Gym Training;room 20;6765;Helmut Rödnacke
-3;08/03/2021 13:40;20;Gym Training;room 21;1232;Cletus Bonde
-3;09/04/2021 14:50;60;PT Consulting;room 22;6660;Albert Yung
-3;10/12/2021 15:55;30;PT Consulting;room 23;0909;Bonnie Boon
+2;2021-04-02 12:00:00;30;Gym Training;room 4;1234;Robert Gustavsson
+1;2021-05-01 13:30:00;25;Group Training;room 5;4321;Britt Marie Larsson
+2;2021-06-05 14:00:00;25;PT Training;room 6;5678;Lars Åke Bobsson
+1;2021-07-12 17:00:00;30;PT Consulting;room 7;8765;Susanna Lund
+3;2021-04-02 12:00:00;30;Gym Training;room 12;1369;Leif Åke
+1;2021-08-03 13:30:00;40;Group Training;room 13;2470;Britt Inger Persson
+2;2021-11-05 14:00:00;45;PT Training;room 14;3113;Konny Thorsson
+3;2021-12-11 17:00:00;25;PT Consulting;room 15;5476;Jessica Ulladottir
+2;2021-01-02 12:00:00;30;Gym Training;room 20;110;Torvald Gunther
+3;2021-02-03 13:30:00;20;Gym Training;room 21;1337;Bruno Baguette
+1;2021-05-05 15:00:00;25;PT Training;room 22;8888;Poppy Pompös
+3;2021-06-12 18:00:00;15;PT Consulting;room 23;9999;Mundo Stark
+3;2021-07-02 12:00:00;30;Gym Training;room 20;6765;Helmut Rödnacke
+3;2021-08-03 13:40:00;20;Gym Training;room 21;1232;Cletus Bonde
+3;2021-09-04 14:50:00;60;PT Consulting;room 22;6660;Albert Yung
+3;2021-10-12 15:55:00;30;PT Consulting;room 23;909;Bonnie Boon

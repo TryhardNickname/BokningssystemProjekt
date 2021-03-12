@@ -56,7 +56,6 @@ namespace BookingSystemGym
                     RegisterNewUser(bs);
                     bs.SaveUserList();
                     break;
-
                 }
 
 
