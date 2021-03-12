@@ -26,7 +26,8 @@ namespace BookingSystemGym
 
             foreach (string s in eq)
             {
-                Equipments.Add(new Equipment(true, 1, s));
+                string[] splitLine = s.Split(';');
+                Equipments.Add(new Equipment(splitLine));
             }
 
             //get registerd UserList
@@ -160,11 +161,12 @@ namespace BookingSystemGym
         public List<Activity> ShowTime(string time) //MM/DD/YYYY HH:MM
         {
             List<Activity> sortedList = new List<Activity>();
+            string hej = Schedule[0].ScheduledTime.ToString("yyyy-MM-dd HH:mm");
 
-            var sort = Schedule.Where(s => s.ScheduledTime.ToString() == time);
+            var sort = Schedule.Where(s => s.ScheduledTime.ToString("yyyy-MM-dd HH:mm") == time);
             foreach (var item in sort)
             {
-                if (item.ScheduledTime.ToString() == time)
+                if (item.ScheduledTime.ToString("yyyy-MM-dd HH:mm") == time)
                 {
                     sortedList.Add(item);
                 }
@@ -181,10 +183,14 @@ namespace BookingSystemGym
         public string ShowBrokenEquip()
         {
             string res = "";
+            int index = 1;
             foreach (Equipment e in Equipments)
             {
                 if (e.Broken)
-                    res += e.Name + "\n";
+                {
+                    res += index + ". " + e.Name + "\n";
+                    index++;
+                }
             }
             return res;
         }
