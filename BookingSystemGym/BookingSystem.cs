@@ -21,14 +21,14 @@ namespace BookingSystemGym
         public BookingSystem()
         {
             //get list of equipments?
-            //Equipments = new List<Equipment>();
-            //string[] eq = File.ReadAllLines(@"../../equipments.txt");
+            Equipments = new List<Equipment>();
+            string[] eq = File.ReadAllLines(@"../../equipments.txt");
 
-            //foreach (string s in eq)
-            //{
-            //    string[] splitLine = s.Split(';');
-            //    Equipments.Add(new Equipment(splitLine));
-            //}
+            foreach (string s in eq)
+            {
+                string[] splitLine = s.Split(';');
+                Equipments.Add(new Equipment(splitLine));
+            }
 
             //get registerd UserList
             UserList = new List<User>();
@@ -179,12 +179,12 @@ namespace BookingSystemGym
         public List<Activity> ShowTime(string time) //MM/DD/YYYY HH:MM
         {
             List<Activity> sortedList = new List<Activity>();
-            string hej = Schedule[0].ScheduledTime.ToString("yyyy-MM-dd HH:mm");
+            string hej = Schedule[0].ScheduledTime.ToString("yyyy-MM-dd");
 
-            var sort = Schedule.Where(s => s.ScheduledTime.ToString("yyyy-MM-dd HH:mm") == time);
+            var sort = Schedule.Where(s => s.ScheduledTime.ToString("yyyy-MM-dd") == time);
             foreach (var item in sort)
             {
-                if (item.ScheduledTime.ToString("yyyy-MM-dd HH:mm") == time)
+                if (item.ScheduledTime.ToString("yyyy-MM-dd") == time)
                 {
                     sortedList.Add(item);
                 }
@@ -205,17 +205,42 @@ namespace BookingSystemGym
         /// 
         /// </summary>
         /// <returns></returns>
-        public string ShowBrokenEquip()
+        
+
+        //public string ShowBrokenEquip()
+        //{
+        //    string res = "";
+        //    int index = 1;
+        //    foreach (Equipment e in Equipments)
+        //    {
+        //        if (e.Broken)
+        //        {
+        //            res += index + ". " + e.Name + "\n";
+        //            index++;
+        //        }
+        //    }
+        //    return res;
+        //}
+
+        public string ShowEquip()
+
         {
             string res = "";
             int index = 1;
             foreach (Equipment e in Equipments)
             {
+                string status;
                 if (e.Broken)
                 {
-                    res += index + ". " + e.Name + "\n";
-                    index++;
+                    status = "Trasig";
                 }
+                else
+                {
+                    status = "Fungerande";
+                }
+
+                res += index + ". " + e.Name + " - " + status + "\n";
+                index++;
             }
             return res;
         }
