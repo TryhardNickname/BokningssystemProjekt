@@ -56,9 +56,9 @@ namespace BookingSystemGym
                     break;
 
                 }
-              
-            
-                
+
+
+
             }
             Console.Clear();
 
@@ -84,147 +84,108 @@ namespace BookingSystemGym
                     Console.WriteLine("= 2. Sök efter tid/dag                   =");
                     Console.WriteLine("= 3. Sök efter tränare                   =");
                     Console.WriteLine("= 4. Visa alla pass                      =");
+                    Console.WriteLine("= 0. Backa                               =");
                     Console.WriteLine("==========================================");
                     Console.Write("Ange val: ");
-                    string input = Console.ReadLine();
-                    if (input == "1")//sök efter pass
+                    string input = GetMenuInput(5);
+                    if (input == "1") //sök efter pass
                     {
                         Console.WriteLine("==========================================");
-                        Console.WriteLine("= 1. Sök på gym                          =");
-                        Console.WriteLine("= 2. Sök på gruppträning                 =");
-                        Console.WriteLine("= 3. Sök på träning med PT               =");
-                        Console.WriteLine("= 4. Sök på konsultation med PT          =");
+                        Console.WriteLine("= 1. Visa vanlig gymträning              =");
+                        Console.WriteLine("= 2. Visa grupptränings-pass             =");
+                        Console.WriteLine("= 3. Visa träning med PT                 =");
+                        Console.WriteLine("= 4. visa konsultation med PT            =");
+                        Console.WriteLine("= 0. Backa                               =");
                         Console.WriteLine("==========================================");
                         Console.Write("Ange val: ");
+                        input = GetMenuInput(5);
 
-                        input = Console.ReadLine().ToLower();
 
-                        if (input == "1") //sök på gym
-                        { 
-                        List<Activity> ST = bs.ShowType(input);
-                        int activityCount = 1;
-                        Console.WriteLine($"Typ av träning {input}");
-                        foreach (var item in ST)
-                        {
-                            Console.WriteLine("==========================================");
-                            //Console.WriteLine($"{item.Name}"); // Zumba/Box/Jump/Spnning???
-                            Console.WriteLine($"= {activityCount} ");
-                            Console.WriteLine($"= Starttid: {item.ScheduledTime} ");
-                            Console.WriteLine($"= Passets längd: { item.SessionLength} timmar. ");
-                            Console.WriteLine($"= Max antal deltagare: {item.MaxParticipants} ");
-                            Console.WriteLine($"= Platser kvar: {item.MaxParticipants - item.BookedParticipants} ");
-                            Console.WriteLine($"= Typ av träning: {item.Type} ");
-                            Console.WriteLine($"= Plats: {item.Room} ");
-                            Console.WriteLine($"= Tränare: {item.Trainer} ");
-                            Console.WriteLine("==========================================");
-                            Console.WriteLine();
-                            activityCount++;
-                        }
+                        // returnerar type av träning beroende på input(1-4)
+                        List<Activity> TypeList = bs.ShowType(input);
+                        PrintActivities(input, TypeList);
+
 
                         Console.WriteLine("Ange vilket pass du vill boka en plats i: (0 för att gå tillbaks)");
-                        input = Console.ReadLine();
+                        input = GetMenuInput(TypeList.Count+1);
                         if (input == "0")
                         {
-
                             continue;
-
                         }
-                        else
+                        else // lägg till tryparse
                         {
-                            bs.CurrentUser.MakeReservation(ST[int.Parse(input) - 1]);
+                            bs.CurrentUser.MakeReservation(TypeList[int.Parse(input) - 1]);
                             Console.WriteLine("Din bokning har genomförts! Välkommen! ");
                         }
+
                     }
-
-                    //else if (input == "2") //sök på gruppträning
-                    //{
-
-                    //}
-
-
-                    //else if (input == "3") // sök på träning med pt
-                    //{
-
-                    //}
-
-
-                    //else if (input == "4") // sök på pt-konsultation
-                    //{
-
-                    //}
-
-                    //else
-                    //{
-                    //    Console.WriteLine("Du måste ange en siffra mellan 1 - 4. ");
-                    //}
-
-
-
-
-                    } else if (input == "2") //Sök tid
+                    else if (input == "2") //Sök tid
                     {
                         Console.WriteLine("Ange datum och tid som du söker pass efter (YYYY-MM-DD HH:MM:SS)");
-                        input = Console.ReadLine(); 
+                        string dateInput = Console.ReadLine(); // felhantering
 
-                        List<Activity> ST = bs.ShowTime(input);
-                        int activityCount = 1;
-                        foreach (var item in ST)
-                        {
-                            Console.WriteLine($"{activityCount}. Passets längd: {item.SessionLength} timmar\nStarttid: " +
-                                              $"{item.ScheduledTime}\nMax antal deltagare: {item.MaxParticipants}\n" +
-                                              $"Platser kvar: {item.MaxParticipants - item.BookedParticipants}\n" +
-                                              $"Typ av träning: {item.Type}\nPlats: {item.Room}\nTränare: {item.Trainer}");
-                            Console.WriteLine("------------------");
-                            Console.WriteLine();
-                            activityCount++;
-                        }
+                        List<Activity> TimeList = bs.ShowTime(dateInput);
+                        PrintActivities(dateInput, TimeList);
+
+                        //foreach (var item in ST)
+                        //{
+                        //    Console.WriteLine($"{activityCount}. Passets längd: {item.SessionLength} timmar\nStarttid: " +
+                        //                      $"{item.ScheduledTime}\nMax antal deltagare: {item.MaxParticipants}\n" +
+                        //                      $"Platser kvar: {item.MaxParticipants - item.BookedParticipants}\n" +
+                        //                      $"Typ av träning: {item.Type}\nPlats: {item.Room}\nTränare: {item.Trainer}");
+                        //    Console.WriteLine("------------------");
+                        //    Console.WriteLine();
+                        //    activityCount++;
+                        //}
 
                         Console.WriteLine("Ange vilket pass du vill boka en plats i: (0 för att gå tillbaks)");
                         input = Console.ReadLine();
                         if (input == "0")
                         {
-                            
-                        } 
+
+                        }
                         else
                         {
-                            bs.CurrentUser.MakeReservation(ST[int.Parse(input) - 1]); 
-                            Console.WriteLine("Din bokning har genomförts! Välkommen! "); 
+                            bs.CurrentUser.MakeReservation(TimeList[int.Parse(input) - 1]);
+                            Console.WriteLine("Din bokning har genomförts! Välkommen! ");
                         }
-                        
 
-                    } else if (input == "3") //Sök PT
+
+                    }
+                    else if (input == "3") //Sök PT
                     {
                         Console.WriteLine("Ange namnet på tränaren");
-                        input = Console.ReadLine(); 
+                        input = Console.ReadLine(); // felhatering
 
-                        List<Activity> ST = bs.ShowTrainer(input);
-                        int activityCount = 1;
-                        foreach (var item in ST)
-                        {
-                            Console.WriteLine($"{activityCount}. Passets längd: {item.SessionLength} timmar\nStarttid: " +
-                                              $"{item.ScheduledTime}\nMax antal deltagare: {item.MaxParticipants}\n" +
-                                              $"Platser kvar: {item.MaxParticipants - item.BookedParticipants}\n" +
-                                              $"Typ av träning: {item.Type}\nPlats: {item.Room}\nTränare: {item.Trainer}");
-                            Console.WriteLine("------------------");
-                            Console.WriteLine();
-                            activityCount++;
-                        }
+                        List<Activity> TrainerList = bs.ShowTrainer(input);
+                        PrintActivities(input, TrainerList);
+
+                        //int activityCount = 1;
+                        //foreach (var item in ST)
+                        //{
+                        //    Console.WriteLine($"{activityCount}. Passets längd: {item.SessionLength} timmar\nStarttid: " +
+                        //                      $"{item.ScheduledTime}\nMax antal deltagare: {item.MaxParticipants}\n" +
+                        //                      $"Platser kvar: {item.MaxParticipants - item.BookedParticipants}\n" +
+                        //                      $"Typ av träning: {item.Type}\nPlats: {item.Room}\nTränare: {item.Trainer}");
+                        //    Console.WriteLine("------------------");
+                        //    Console.WriteLine();
+                        //    activityCount++;
+                        //}
 
                         Console.WriteLine("Ange vilket pass du vill boka en plats i: (0 för att gå tillbaks)");
                         input = Console.ReadLine();
                         if (input == "0")
                         {
-                            
+
                         }
                         else
                         {
-                            bs.CurrentUser.MakeReservation(ST[int.Parse(input)-1]);
+                            bs.CurrentUser.MakeReservation(TrainerList[int.Parse(input) - 1]);
                         }
                     }
 
-                    //string schedule = bs.ShowSchedule();
-                    //Console.WriteLine(schedule);
-                    //välj dag? / tid? pass?
+
+
                 }
                 //2. Se trasiga maskiner
                 if (userInput == "2")
@@ -386,6 +347,29 @@ namespace BookingSystemGym
 
             Activity newActivity = new Activity(sessionLength, scheduledTime, maxParticipants, type, room, iD, trainer);
             bs.AddToSchedule(newActivity);
+        }
+
+        static void PrintActivities(string input, List<Activity> list)
+        {
+
+            int activityCount = 1;
+            Console.WriteLine($"Typ av träning {input}");
+            foreach (var item in list)
+            {
+                Console.WriteLine("==========================================");
+                //Console.WriteLine($"{item.Name}"); // Zumba/Box/Jump/Spnning???
+                Console.WriteLine($"= {activityCount} ");
+                Console.WriteLine($"= Starttid: {item.ScheduledTime} ");
+                Console.WriteLine($"= Passets längd: { item.SessionLength} timmar. ");
+                Console.WriteLine($"= Max antal deltagare: {item.MaxParticipants} ");
+                Console.WriteLine($"= Platser kvar: {item.MaxParticipants - item.BookedParticipants} ");
+                Console.WriteLine($"= Typ av träning: {item.Type} ");
+                Console.WriteLine($"= Plats: {item.Room} ");
+                Console.WriteLine($"= Tränare: {item.Trainer} ");
+                Console.WriteLine("==========================================");
+                Console.WriteLine();
+                activityCount++;
+            }
         }
     }
 }
