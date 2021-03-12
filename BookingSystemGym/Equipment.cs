@@ -10,11 +10,11 @@ namespace BookingSystemGym
     {
 
         public bool Broken { get; set; }
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
 
 
-        public Equipment(bool broken, int id, string name)
+        public Equipment(bool broken, string id, string name)
         {
             Broken = broken;
             Id = id;
@@ -24,7 +24,7 @@ namespace BookingSystemGym
         public Equipment(string[] equipmentInfo)
         {
             Broken = bool.Parse(equipmentInfo[0]);
-            Id = int.Parse(equipmentInfo[1]);
+            Id = equipmentInfo[1];
             Name = equipmentInfo[2];
         }
 

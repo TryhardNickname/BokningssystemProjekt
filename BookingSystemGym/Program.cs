@@ -190,10 +190,10 @@ namespace BookingSystemGym
 
 
                 }
-                //2. Se trasiga maskiner
+                //2. Se lista på maskiner
                 if (userInput == "2")
                 {
-                    string bi = bs.ShowBrokenEquip();
+                    string bi = bs.ShowEquip();
                     Console.WriteLine(bi);
                 }
                 //3. Boka Pass,PT...
@@ -208,7 +208,7 @@ namespace BookingSystemGym
                 //4. Ange trasig maskin
                 if (userInput == "4")
                 {
-                    Console.WriteLine(bs.ShowBrokenEquip());
+                    Console.WriteLine(bs.ShowEquip());
                     Console.WriteLine();
                     Console.WriteLine("Ange vilken maskin du vill ändra: ");
                     userInput = Console.ReadLine();
@@ -300,11 +300,11 @@ namespace BookingSystemGym
         {
 
             Console.WriteLine();
-            Console.WriteLine("======================================================");
-            Console.WriteLine($"= Välkommen till bokningen {bs.CurrentUser.Name}! ");
-            Console.WriteLine("= 1. Se Bokningsschemat och boka pass ");
-            Console.WriteLine("= 2. Se trasiga maskiner ");
-            Console.WriteLine("= 3. Boka Pass,PT... ");
+            Console.WriteLine("==========================================");
+            Console.WriteLine($"= Välkommen till bokningen  {bs.CurrentUser.Name}!              =");
+            Console.WriteLine("= 1. Se Bokningsschemat och boka pass    =");
+            Console.WriteLine("= 2. Se maskiners status                 =");
+            Console.WriteLine("= 3. Boka Pass,PT...                     =");
 
             if (bs.CurrentUser.Role != "user")
             {
