@@ -10,11 +10,11 @@ namespace BookingSystemGym
     {
 
         public bool Broken { get; set; }
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string Name { get; set; }
 
 
-        public Equipment(bool broken, int id, string name)
+        public Equipment(bool broken, string id, string name)
         {
             Broken = broken;
             Id = id;
