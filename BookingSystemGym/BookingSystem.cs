@@ -52,6 +52,9 @@ namespace BookingSystemGym
             //LogIn();
         }
 
+        /// <summary>
+        /// Create a new schedule.
+        /// </summary>
         public void CreateSchedule()
         {
             Schedule = new List<Activity>();
@@ -59,14 +62,17 @@ namespace BookingSystemGym
             Schedule.Add(act);
         }
 
+        /// <summary>
+        /// Save schedule 
+        /// </summary>
         public void SaveSchedule()
         {
             List<string> Save = new List<string>();
             foreach (var activity in Schedule)
             {
-                Save.Add($"{activity.Type};{activity.ScheduledTime};{activity.Room};"); //{ activity.Trainer}
+                Save.Add($"{activity.Type};{activity.ScheduledTime};{activity.Room};{activity.Trainer}"); 
             }
-            //File.WriteAllLines(scheduleFile, Save);
+            File.WriteAllLines(scheduleFile, Save);
         }
 
         public void AddToSchedule(Activity a)
@@ -219,6 +225,10 @@ namespace BookingSystemGym
             }
         }
 
+        /// <summary>
+        /// Check if users role are Admin or Emoloyee. Show all activity and let the user select which activity to change.   
+        /// </summary>
+        /// <param name="user"></param>
         public void ChangeActivity(User user)
         {
             if (user.Role == "Employee" || user.Role == "Admin")
@@ -310,9 +320,22 @@ namespace BookingSystemGym
                 }
                 Console.WriteLine("\n");
             }
-            
         }
-        //returns true if succesful
+        /// <summary>
+        /// Send a sms to all participant in a canceled activity
+        /// </summary>
+        /// <returns>A string massage</returns>
+        public string SendMassage ()
+        {
+            //NYI
+            return "Ditt pass har blivit inställt";
+        }
+
+        /// <summary>
+        /// Check if input id exist in user class
+        /// </summary>
+        /// <param id="inputId"></param>
+        /// <returns>true if id exist, false if id dont exist</returns>
         public bool LogIn(string inputId)
         {
             foreach (User u in UserList)
@@ -330,7 +353,13 @@ namespace BookingSystemGym
             return false;
         }
 
-        //returns true if succesful
+        /// <summary>
+        /// Rester a nu user
+        /// </summary>
+        /// <param id="inputId"></param>
+        /// <param role="role"></param>
+        /// <param name="name"></param>
+        /// <returns>true if success, false if user id alredy exists</returns>
         public bool Register(string inputId, string role, string name)
         {
             foreach (User u in UserList)
