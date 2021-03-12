@@ -49,13 +49,11 @@ namespace BookingSystemGym
 
                         }
                     }
-
-                    if(userInput == "2")
-                    {
-                        RegisterNewUser(bs);
-
-
-                    }
+                }
+                if(userInput == "2")
+                {
+                    RegisterNewUser(bs);
+                    break;
                 }
             }
 
@@ -81,7 +79,7 @@ namespace BookingSystemGym
                     if (input == "1")
                     {
                         Console.WriteLine("1. Sök på gym\n2. Sök på gruppträning\n3. Sök på träning med PT\n4. Sök på konsultation med PT");
-                        input = Console.ReadLine().ToLower(); 
+                        input = Console.ReadLine(); 
 
                         List<Activity> ST = bs.ShowType(input);
                         int activityCount = 1;
@@ -100,7 +98,7 @@ namespace BookingSystemGym
                         input = Console.ReadLine();
                         if (input == "0")
                         {
-                            break;
+                            
                         }
                         else
                         {
@@ -108,6 +106,64 @@ namespace BookingSystemGym
                         }
                         
 
+                    } else if (input == "2")
+                    {
+                        Console.WriteLine("Ange datum och tid som du söker pass efter (YYYY-MM-DD HH:MM:SS)");
+                        input = Console.ReadLine(); 
+
+                        List<Activity> ST = bs.ShowTime(input);
+                        int activityCount = 1;
+                        foreach (var item in ST)
+                        {
+                            Console.WriteLine($"{activityCount}. Passets längd: {item.SessionLength} timmar\nStarttid: " +
+                                              $"{item.ScheduledTime}\nMax antal deltagare: {item.MaxParticipants}\n" +
+                                              $"Platser kvar: {item.MaxParticipants - item.BookedParticipants}\n" +
+                                              $"Typ av träning: {item.Type}\nPlats: {item.Room}\nTränare: {item.Trainer}");
+                            Console.WriteLine("------------------");
+                            Console.WriteLine();
+                            activityCount++;
+                        }
+
+                        Console.WriteLine("Ange vilket pass du vill boka en plats i: (0 för att gå tillbaks)");
+                        input = Console.ReadLine();
+                        if (input == "0")
+                        {
+                            
+                        } 
+                        else
+                        {
+                            bs.CurrentUser.MakeReservation(ST[int.Parse(input)-1]);
+                        }
+                        
+
+                    } else if (input == "3")
+                    {
+                        Console.WriteLine("Ange namnet på tränaren");
+                        input = Console.ReadLine(); 
+
+                        List<Activity> ST = bs.ShowTrainer(input);
+                        int activityCount = 1;
+                        foreach (var item in ST)
+                        {
+                            Console.WriteLine($"{activityCount}. Passets längd: {item.SessionLength} timmar\nStarttid: " +
+                                              $"{item.ScheduledTime}\nMax antal deltagare: {item.MaxParticipants}\n" +
+                                              $"Platser kvar: {item.MaxParticipants - item.BookedParticipants}\n" +
+                                              $"Typ av träning: {item.Type}\nPlats: {item.Room}\nTränare: {item.Trainer}");
+                            Console.WriteLine("------------------");
+                            Console.WriteLine();
+                            activityCount++;
+                        }
+
+                        Console.WriteLine("Ange vilket pass du vill boka en plats i: (0 för att gå tillbaks)");
+                        input = Console.ReadLine();
+                        if (input == "0")
+                        {
+                            
+                        }
+                        else
+                        {
+                            bs.CurrentUser.MakeReservation(ST[int.Parse(input)-1]);
+                        }
                     }
                     //string schedule = bs.ShowSchedule();
                     //Console.WriteLine(schedule);
@@ -133,10 +189,10 @@ namespace BookingSystemGym
                 {
                     Console.WriteLine(bs.ShowBrokenEquip());
                     Console.WriteLine();
-                    Console.WriteLine("Ange vilken maskin du vill ändra[index]: ");
+                    Console.WriteLine("Ange vilken maskin du vill ändra: ");
                     userInput = Console.ReadLine();
 
-                    bs.ChangeEquipmentStatus(bs.CurrentUser, bs.Equipments[int.Parse(userInput)]);
+                    bs.ChangeEquipmentStatus(bs.CurrentUser, bs.Equipments[int.Parse(userInput) - 1]);
                 }
                 //5. Gör ändring i bokningsschemat
                 if (userInput == "5")
