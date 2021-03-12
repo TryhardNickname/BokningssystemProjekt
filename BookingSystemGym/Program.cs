@@ -104,7 +104,8 @@ namespace BookingSystemGym
                         }
                         else
                         {
-                            bs.CurrentUser.MakeReservation(ST[int.Parse(input)-1]);
+                            bs.CurrentUser.MakeReservation(ST[int.Parse(input) - 1]); 
+                            Console.WriteLine("Din bokning har genomförts! Välkommen! "); 
                         }
                         
 
