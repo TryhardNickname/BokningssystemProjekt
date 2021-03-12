@@ -26,7 +26,8 @@ namespace BookingSystemGym
 
             foreach (string s in eq)
             {
-                Equipments.Add(new Equipment(true, 1, s));
+                string[] splitLine = s.Split(';');
+                Equipments.Add(new Equipment(splitLine));
             }
 
             //get registerd UserList
