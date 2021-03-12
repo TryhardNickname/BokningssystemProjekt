@@ -21,6 +21,13 @@ namespace BookingSystemGym
             Name = name;
         }
 
+        public Equipment(string[] equipmentInfo)
+        {
+            Broken = bool.Parse(equipmentInfo[0]);
+            Id = int.Parse(equipmentInfo[1]);
+            Name = equipmentInfo[2];
+        }
+
         public void ChangeStatus()
         {
             Broken = !Broken;
