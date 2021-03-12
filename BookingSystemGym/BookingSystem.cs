@@ -15,7 +15,8 @@ namespace BookingSystemGym
         public List<Activity> Schedule { get; set; }
         public List<User> UserList { get; set; }
         public User CurrentUser { get; set; }
-        string scheduleFile = (@"../../scheduleFile.txt");
+
+        public string scheduleFile = (@"../../scheduleFile.txt");
 
         public BookingSystem()
         {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace BookingSystemGym
 {
@@ -97,13 +98,13 @@ namespace BookingSystemGym
 
                         Console.WriteLine("Ange vilket pass du vill boka en plats i: (0 för att gå tillbaks)");
                         input = Console.ReadLine();
-                        if (input == 0.ToString())
+                        if (input == "0")
                         {
                             break;
                         }
                         else
                         {
-                            bs.CurrentUser.MakeReservation(ST[activityCount - 1]);
+                            bs.CurrentUser.MakeReservation(ST[int.Parse(input)-1]);
                         }
                         
 
@@ -121,6 +122,7 @@ namespace BookingSystemGym
                 //3. Boka Pass,PT...
                 if (userInput == "3")
                 {
+                    Console.WriteLine("TBI");
                     // vilket sorts pass vill du boka?
                     //<<PTpass
                     //lista över pt pass, välj ett
@@ -129,8 +131,8 @@ namespace BookingSystemGym
                 //4. Ange trasig maskin
                 if (userInput == "4")
                 {
-                    string bi = bs.ShowBrokenEquip();
-                    Console.WriteLine(bi);
+                    Console.WriteLine(bs.ShowBrokenEquip());
+                    Console.WriteLine();
                     Console.WriteLine("Ange vilken maskin du vill ändra[index]: ");
                     userInput = Console.ReadLine();
 
@@ -143,10 +145,16 @@ namespace BookingSystemGym
                     bs.ChangeActivity(bs.CurrentUser);
                     //
                 }
-                //6. Skapa nytt bokningsschema
+                //6. Ladda upp nytt bokningsschema
                 if(userInput == "6")
                 {
-                    //load new textfile ?
+                    Console.WriteLine("Vänligen ange filnamn för ny schema-fil: ");
+                    string fileName = Console.ReadLine();
+                    if (File.Exists(fileName))
+                    {
+                        bs.scheduleFile = fileName;
+                        //bs.loadSchedule(); kopiera från konstruktor
+                    }
                 }
 
             }
@@ -201,7 +209,7 @@ namespace BookingSystemGym
         static int PrintMenu(BookingSystem bs)
         {
             Console.WriteLine("**Välkommen till bokningen!**");
-            Console.WriteLine("1. Se Bokningsschemat");
+            Console.WriteLine("1. Se Bokningsschemat och boka pass");
             Console.WriteLine("2. Se trasiga maskiner");
             Console.WriteLine("3. Boka Pass,PT...");
             if (bs.CurrentUser.Role != "user")
@@ -211,7 +219,7 @@ namespace BookingSystemGym
 
                 if(bs.CurrentUser.Role == "admin")
                 {
-                    Console.WriteLine("6. Skapa nytt bokningsschema");
+                    Console.WriteLine("6. Ladda upp bokningsschema");
                     Console.WriteLine("0. Logga ut");
                     return 6;
                 }
