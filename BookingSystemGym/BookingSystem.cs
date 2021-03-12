@@ -21,14 +21,14 @@ namespace BookingSystemGym
         public BookingSystem()
         {
             //get list of equipments?
-            //Equipments = new List<Equipment>();
-            //string[] eq = File.ReadAllLines(@"../../equipments.txt");
+            Equipments = new List<Equipment>();
+            string[] eq = File.ReadAllLines(@"../../equipments.txt");
 
-            //foreach (string s in eq)
-            //{
-            //    string[] splitLine = s.Split(';');
-            //    Equipments.Add(new Equipment(splitLine));
-            //}
+            foreach (string s in eq)
+            {
+                string[] splitLine = s.Split(';');
+                Equipments.Add(new Equipment(splitLine));
+            }
 
             //get registerd UserList
             UserList = new List<User>();
@@ -186,17 +186,39 @@ namespace BookingSystemGym
             return Schedule.OrderBy(s => s.ScheduledTime.ToString()).ToList();
         }
 
-        public string ShowBrokenEquip()
+        //public string ShowBrokenEquip()
+        //{
+        //    string res = "";
+        //    int index = 1;
+        //    foreach (Equipment e in Equipments)
+        //    {
+        //        if (e.Broken)
+        //        {
+        //            res += index + ". " + e.Name + "\n";
+        //            index++;
+        //        }
+        //    }
+        //    return res;
+        //}
+
+        public string ShowEquip()
         {
             string res = "";
             int index = 1;
             foreach (Equipment e in Equipments)
             {
+                string status;
                 if (e.Broken)
                 {
-                    res += index + ". " + e.Name + "\n";
-                    index++;
+                    status = "Trasig";
                 }
+                else
+                {
+                    status = "Fungerande";
+                }
+
+                res += index + ". " + e.Name + " - " + status + "\n";
+                index++;
             }
             return res;
         }
