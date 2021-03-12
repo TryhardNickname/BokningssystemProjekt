@@ -185,7 +185,7 @@ namespace BookingSystemGym
                     }
                     else if (input == "4")
                     {
-                        PrintActivities("allt", bs.Schedule.ToList()));
+                        PrintActivities("allt", bs.Schedule.ToList());
                     }
 
 
@@ -256,7 +256,6 @@ namespace BookingSystemGym
         //felhantering basic
         static string GetMenuInput(int amountOfChoices)
         {
-            Console.Write(">");
             string userInput = Console.ReadLine();
 
             while (true)
@@ -283,8 +282,7 @@ namespace BookingSystemGym
         static void RegisterNewUser(BookingSystem bs)
         {
 
-            Console.WriteLine("Skriv ditt namn: ");
-            Console.Write(">");
+            Console.Write("Skriv ditt namn: ");
             string name = Console.ReadLine();
 
             // Här kan vi göra på ett bättre sätt
@@ -302,28 +300,30 @@ namespace BookingSystemGym
         {
 
             Console.WriteLine();
-            Console.WriteLine("==========================================");
-            Console.WriteLine($"= Välkommen till bokningen  {bs.CurrentUser.Name}!              =");
-            Console.WriteLine("= 1. Se Bokningsschemat och boka pass    =");
-            Console.WriteLine("= 2. Se trasiga maskiner                 =");
-            Console.WriteLine("= 3. Boka Pass,PT...                     =");
+            Console.WriteLine("======================================================");
+            Console.WriteLine($"= Välkommen till bokningen {bs.CurrentUser.Name}! ");
+            Console.WriteLine("= 1. Se Bokningsschemat och boka pass ");
+            Console.WriteLine("= 2. Se trasiga maskiner ");
+            Console.WriteLine("= 3. Boka Pass,PT... ");
 
             if (bs.CurrentUser.Role != "user")
             {
-                Console.WriteLine("= 4. Ange trasig maskin              =");
-                Console.WriteLine("= 5. Gör ändring i bokningsschemat   =");
+                Console.WriteLine("= 4. Ange trasig maskin ");
+                Console.WriteLine("= 5. Gör ändring i bokningsschemat ");
 
                 if (bs.CurrentUser.Role == "admin")
                 {
-                    Console.WriteLine("= 6. Ladda upp bokningsschema    =");
-                    Console.WriteLine("= 0. Logga ut                    =");
+                    Console.WriteLine("= 6. Ladda upp bokningsschema ");
+                    Console.WriteLine("= 0. Logga ut ");
+                    Console.WriteLine("======================================================");
                     return 6;
                 }
-                Console.WriteLine("= 0. Logga ut                        =");
+                Console.WriteLine("= 0. Logga ut ");
+                Console.WriteLine("======================================================");
                 return 5;
             }
-            Console.WriteLine("= 0. Logga ut                            =");
-            Console.WriteLine("==========================================");
+            Console.WriteLine("= 0. Logga ut                                       =");
+            Console.WriteLine("=====================================================");
             return 4;
         }
 
