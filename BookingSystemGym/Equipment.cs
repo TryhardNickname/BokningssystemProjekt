@@ -11,21 +11,21 @@ namespace BookingSystemGym
 
         public bool Broken { get; set; }
         public string Id { get; set; }
-        public string Name { get; set; }
+        public string Type { get; set; }
 
 
         public Equipment(bool broken, string id, string name)
         {
             Broken = broken;
             Id = id;
-            Name = name;
+            Type = name;
         }
 
         public Equipment(string[] equipmentInfo)
         {
             Broken = bool.Parse(equipmentInfo[0]);
             Id = equipmentInfo[1];
-            Name = equipmentInfo[2];
+            Type = equipmentInfo[2];
         }
 
         public void ChangeStatus()
