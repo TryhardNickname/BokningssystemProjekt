@@ -121,7 +121,7 @@ namespace BookingSystemGym
                     }
                     else if (input == "2") //Sök tid
                     {
-                        Console.WriteLine("Ange datum och tid som du söker pass efter (YYYY-MM-DD HH:MM:SS)");
+                        Console.WriteLine("Ange datum och tid som du söker pass efter (YYYY-MM-DD HH:MM:SS)"); // ändra till dag
                         string dateInput = Console.ReadLine(); // felhantering
 
                         List<Activity> TimeList = bs.ShowTime(dateInput);
@@ -183,7 +183,10 @@ namespace BookingSystemGym
                             bs.CurrentUser.MakeReservation(TrainerList[int.Parse(input) - 1]);
                         }
                     }
-
+                    else if (input == "4")
+                    {
+                        PrintActivities("allt", bs.Schedule.ToList()));
+                    }
 
 
                 }
