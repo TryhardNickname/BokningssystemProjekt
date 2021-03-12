@@ -229,5 +229,30 @@ namespace BookingSystemGym
             Console.WriteLine("0. Logga ut");
             return 4;
         }
+
+        static void CreateActivity(BookingSystem bs)
+        {
+            int sessionLength, maxParticipants, iD;
+            string type, room, trainer;
+            DateTime scheduledTime;
+
+            Console.WriteLine("Skriv in längden på passet i timmar: ");
+            sessionLength = int.Parse(Console.ReadLine());
+            Console.WriteLine("Skriv in datumet i följande format: YY/MM/DD hh:mm");
+            scheduledTime = DateTime.Parse(Console.ReadLine());
+            Console.WriteLine("Skriv in max antal deltagare: ");
+            maxParticipants = int.Parse(Console.ReadLine());
+            Console.WriteLine("Skriv in typen av träning: ");
+            type = Console.ReadLine();
+            Console.WriteLine("Skriv in vilket rum aktiviteten ska äga rum i: ");
+            room = Console.ReadLine();
+            Console.WriteLine("Skriv in IDet på aktiviteten: ");
+            iD = int.Parse(Console.ReadLine());
+            Console.WriteLine("Skriv in vem tränaren är: ");
+            trainer = Console.ReadLine();
+
+            Activity newActivity = new Activity(sessionLength, scheduledTime, maxParticipants, type, room, iD, trainer);
+            bs.AddToSchedule(newActivity);
+        }
     }
 }
