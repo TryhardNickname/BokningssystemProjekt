@@ -21,14 +21,14 @@ namespace BookingSystemGym
         public BookingSystem()
         {
             //get list of equipments?
-            Equipments = new List<Equipment>();
-            string[] eq = File.ReadAllLines(@"../../equipments.txt");
+            //Equipments = new List<Equipment>();
+            //string[] eq = File.ReadAllLines(@"../../equipments.txt");
 
-            foreach (string s in eq)
-            {
-                string[] splitLine = s.Split(';');
-                Equipments.Add(new Equipment(splitLine));
-            }
+            //foreach (string s in eq)
+            //{
+            //    string[] splitLine = s.Split(';');
+            //    Equipments.Add(new Equipment(splitLine));
+            //}
 
             //get registerd UserList
             UserList = new List<User>();

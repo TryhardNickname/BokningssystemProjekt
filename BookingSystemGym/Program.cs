@@ -87,7 +87,7 @@ namespace BookingSystemGym
                     Console.WriteLine("==========================================");
                     Console.Write("Ange val: ");
                     string input = Console.ReadLine();
-                    if (input == "1")
+                    if (input == "1")//sök efter pass
                     {
                         Console.WriteLine("==========================================");
                         Console.WriteLine("= 1. Sök på gym                          =");
@@ -99,7 +99,8 @@ namespace BookingSystemGym
 
                         input = Console.ReadLine().ToLower();
 
-
+                        if (input == "1") //sök på gym
+                        { 
                         List<Activity> ST = bs.ShowType(input);
                         int activityCount = 1;
                         Console.WriteLine($"Typ av träning {input}");
@@ -119,31 +120,8 @@ namespace BookingSystemGym
                             Console.WriteLine();
                             activityCount++;
                         }
-                    }
 
-                    else if (input == "2")
-                    {
-
-                    }
-
-
-                    else if (input == "3")
-                    {
-
-                    }
-
-
-                    else if (input == "4")
-                    {
-
-                    }
-
-                    else
-                    {
-                        Console.WriteLine("Du måste ange en siffra mellan 1 - 4. ");
-                    }
-
-                    Console.WriteLine("Ange vilket pass du vill boka en plats i: (0 för att gå tillbaks)");
+                        Console.WriteLine("Ange vilket pass du vill boka en plats i: (0 för att gå tillbaks)");
                         input = Console.ReadLine();
                         if (input == "0")
                         {
@@ -153,9 +131,34 @@ namespace BookingSystemGym
                         }
                         else
                         {
-                            bs.CurrentUser.MakeReservation(ST[int.Parse(input) - 1]); 
-                            Console.WriteLine("Din bokning har genomförts! Välkommen! "); 
+                            bs.CurrentUser.MakeReservation(ST[int.Parse(input) - 1]);
+                            Console.WriteLine("Din bokning har genomförts! Välkommen! ");
                         }
+                    }
+
+                    //else if (input == "2") //sök på gruppträning
+                    //{
+
+                    //}
+
+
+                    //else if (input == "3") // sök på träning med pt
+                    //{
+
+                    //}
+
+
+                    //else if (input == "4") // sök på pt-konsultation
+                    //{
+
+                    //}
+
+                    //else
+                    //{
+                    //    Console.WriteLine("Du måste ange en siffra mellan 1 - 4. ");
+                    //}
+
+
 
 
                     } else if (input == "2") //Sök tid
