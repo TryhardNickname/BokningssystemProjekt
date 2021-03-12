@@ -303,29 +303,29 @@ namespace BookingSystemGym
 
             Console.WriteLine();
             Console.WriteLine("================================================");
-            Console.WriteLine($"= Välkommen till bokningen  {bs.CurrentUser.Name}!  =");
-            Console.WriteLine("= 1. Se Bokningsschemat och boka pass          =");
-            Console.WriteLine("= 2. Se maskiners status                       =");
-            Console.WriteLine("= 3. Boka Pass,PT...                           =");
+            Console.WriteLine($"Välkommen till bokningen  {bs.CurrentUser.Name}! ");
+            Console.WriteLine("1. Se Bokningsschemat och boka pass ");
+            Console.WriteLine("2. Se maskiners status ");
+            Console.WriteLine("3. Boka Pass,PT... ");
 
             if (bs.CurrentUser.Role != "GymUser")
             {
-                Console.WriteLine("= 4. Ange trasig maskin ");
-                Console.WriteLine("= 5. Gör ändring i bokningsschemat ");
+                Console.WriteLine("4. Ange trasig maskin ");
+                Console.WriteLine("5. Gör ändring i bokningsschemat ");
 
                 if (bs.CurrentUser.Role == "Admin")
                 {
-                    Console.WriteLine("= 6. Ladda upp bokningsschema ");
-                    Console.WriteLine("= 0. Logga ut ");
-                    Console.WriteLine("======================================================");
+                    Console.WriteLine("6. Ladda upp bokningsschema ");
+                    Console.WriteLine("0. Logga ut ");
+                    Console.WriteLine("================================================");
                     return 7;
                 }
-                Console.WriteLine("= 0. Logga ut ");
-                Console.WriteLine("======================================================");
+                Console.WriteLine("0. Logga ut ");
+                Console.WriteLine("================================================");
                 return 6;
             }
-            Console.WriteLine("= 0. Logga ut                                       =");
-            Console.WriteLine("=====================================================");
+            Console.WriteLine("0. Logga ut ");
+            Console.WriteLine("================================================");
             return 4;
         }
 
