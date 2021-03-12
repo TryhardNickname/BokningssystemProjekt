@@ -53,9 +53,9 @@ namespace BookingSystemGym
         }
 
         /// <summary>
-        /// Create a new schedule.
+        /// Create a new schedule
         /// </summary>
-        public void CreateSchedule()
+        public void CreateSchedule() //NYI in the program
         {
             Schedule = new List<Activity>();
             Activity act = new Activity(1, new DateTime(2021, 03, 10), 20, "Gym Training", "big room", 1337, "Anna Anderson");
@@ -65,7 +65,7 @@ namespace BookingSystemGym
         /// <summary>
         /// Save schedule 
         /// </summary>
-        public void SaveSchedule()
+        public void SaveSchedule() //NYI in the program 
         {
             List<string> Save = new List<string>();
             foreach (var activity in Schedule)
@@ -75,6 +75,10 @@ namespace BookingSystemGym
             File.WriteAllLines(scheduleFile, Save);
         }
 
+        /// <summary>
+        /// Add an activity to the schedule
+        /// </summary>
+        /// <param name="a"></param>
         public void AddToSchedule(Activity a)
         {
             if (CurrentUser.Role == "Admin")
@@ -87,25 +91,26 @@ namespace BookingSystemGym
             }
         }
 
-        public void RemoveFromSchedule(Activity a)
+        /// <summary>
+        /// Remove a aktivity from the schedule
+        /// </summary>
+        /// <param name="a"></param>
+        public void RemoveFromSchedule(Activity a) //NYI in the program
         {
             if (CurrentUser.Role == "Admin")
             {
                 if (Schedule.Remove(a))
                 {
-                    //skicka meddelande "a är borttaget"
+                    //send a message to comferm removed aktivity
                 }
-                //foreach (Activity b in Schedule)
-                //{
-                //    if (a.Id == b.Id)
-                //    {
-                //        Schedule.Remove(b);
-                //    }
-                //}
             }
         }
-        
-        //Show all avtivitys of a specific type (users select)
+
+        /// <summary>
+        /// Fetch schedule and sort it after given type
+        /// </summary>
+        /// <param name="op"></param>
+        /// <returns>List</returns>
         public List<Activity> ShowType(string op)
         {
             List<Activity> sortedList = new List<Activity>();
@@ -148,8 +153,11 @@ namespace BookingSystemGym
             }
             return sortedList.ToList();
         }
-
-        //Show all activitys where the trainers name is input
+        /// <summary>
+        /// Fetch schedule and sort it after given trainer name
+        /// </summary>
+        /// <param name="op"></param>
+        /// <returns>List</returns>
         public List<Activity> ShowTrainer(string op)
         {
             List<Activity> sortedList = new List<Activity>();
@@ -163,7 +171,11 @@ namespace BookingSystemGym
             return sortedList.ToList();
         }
 
-        //ScheduledTime prop privare??
+        /// <summary>
+        /// Fetch schedule and sort it after a given time
+        /// </summary>
+        /// <param name="time"></param>
+        /// <returns>List</returns>
         public List<Activity> ShowTime(string time) //MM/DD/YYYY HH:MM
         {
             List<Activity> sortedList = new List<Activity>();
@@ -180,12 +192,19 @@ namespace BookingSystemGym
             return sortedList.ToList();
         }
 
-        //Show all activitys in the schedule
+        /// <summary>
+        /// Fetch all activitys in the schedule
+        /// </summary>
+        /// <returns>list</returns>
         public List<Activity> ShowAllInSchedule()
         {
             return Schedule.OrderBy(s => s.ScheduledTime.ToString()).ToList();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public string ShowBrokenEquip()
         {
             string res = "";
@@ -226,7 +245,7 @@ namespace BookingSystemGym
         }
 
         /// <summary>
-        /// Check if users role are Admin or Emoloyee. Show all activity and let the user select which activity to change.   
+        /// Check if users role are Admin or Emoloyee. Show all activity and let the user select which activity to change   
         /// </summary>
         /// <param name="user"></param>
         public void ChangeActivity(User user)
@@ -324,7 +343,7 @@ namespace BookingSystemGym
         /// <summary>
         /// Send a sms to all participant in a canceled activity
         /// </summary>
-        /// <returns>A string massage</returns>
+        /// <returns>string</returns>
         public string SendMassage ()
         {
             //NYI
@@ -335,7 +354,7 @@ namespace BookingSystemGym
         /// Check if input id exist in user class
         /// </summary>
         /// <param id="inputId"></param>
-        /// <returns>true if id exist, false if id dont exist</returns>
+        /// <returns>bool</returns>
         public bool LogIn(string inputId)
         {
             foreach (User u in UserList)
@@ -359,7 +378,7 @@ namespace BookingSystemGym
         /// <param id="inputId"></param>
         /// <param role="role"></param>
         /// <param name="name"></param>
-        /// <returns>true if success, false if user id alredy exists</returns>
+        /// <returns>bool</returns>
         public bool Register(string inputId, string role, string name)
         {
             foreach (User u in UserList)
