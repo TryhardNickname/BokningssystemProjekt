@@ -17,31 +17,68 @@ namespace BookingSystemGym
         public User CurrentUser { get; set; }
 
         public string scheduleFile = (@"../../scheduleFile.txt");
-
+        public string equipmentsFile = (@"../../equipments.txt");
+        public string userListFile = (@"../../userlist.txt");
         public BookingSystem()
+        {
+            LoadUserList();
+
+            LoadEquipmentList();
+
+            LoadSchedule(scheduleFile);
+        }
+
+        public void LoadUserList()
+        {
+            //get registerd UserList
+            UserList = new List<User>();
+            string[] ul = File.ReadAllLines(userListFile);
+
+            foreach (string line in ul)
+            {
+                string[] usr = line.Split(';');
+                UserList.Add(new User(usr[0], usr[1], usr[2]));
+            }
+        }
+        public void SaveUserList()
+        {
+            List<string> Save = new List<string>();
+            foreach (var user in UserList)
+            {
+                Save.Add($"{user.Id};{user.Role};{user.Name}");
+            }
+            File.WriteAllLines(equipmentsFile, Save);
+        }
+
+        public void LoadEquipmentList()
         {
             //get list of equipments?
             Equipments = new List<Equipment>();
-            string[] eq = File.ReadAllLines(@"../../equipments.txt");
+            string[] eq = File.ReadAllLines(equipmentsFile);
 
             foreach (string s in eq)
             {
                 string[] splitLine = s.Split(';');
                 Equipments.Add(new Equipment(splitLine));
             }
-
-            //get registerd UserList
-            UserList = new List<User>();
-            string[] ul = File.ReadAllLines(@"../../userlist.txt");
-
-            foreach (string line in ul)
+        }
+        public void SaveEquipmentList()
+        {
+            List<string> Save = new List<string>();
+            foreach (var equipment in Equipments)
             {
-                string[] usr = line.Split(',');
-                UserList.Add(new User(usr[0], usr[1], usr[2]));
+                Save.Add($"{equipment.Broken};{equipment.Id};{equipment.Type}");
             }
+            File.WriteAllLines(equipmentsFile, Save);
+        }
 
+        /// <summary>
+        /// Load a schedule from file
+        /// </summary>
+        public void LoadSchedule(string newFile)
+        {
             Schedule = new List<Activity>();
-            string[] scheduleFromFile = File.ReadAllLines(scheduleFile);
+            string[] scheduleFromFile = File.ReadAllLines(newFile);
 
             //get schedule
             foreach (string line in scheduleFromFile)
@@ -49,17 +86,6 @@ namespace BookingSystemGym
                 string[] activity = line.Split(';');
                 Schedule.Add(new Activity(activity));
             }
-            //LogIn();
-        }
-
-        /// <summary>
-        /// Create a new schedule
-        /// </summary>
-        public void CreateSchedule() //NYI in the program
-        {
-            Schedule = new List<Activity>();
-            Activity act = new Activity(1, new DateTime(2021, 03, 10), 20, "Gym Training", "big room", 1337, "Anna Anderson");
-            Schedule.Add(act);
         }
 
         /// <summary>
@@ -171,6 +197,7 @@ namespace BookingSystemGym
             return sortedList.ToList();
         }
 
+
         /// <summary>
         /// Fetch schedule and sort it after a given time
         /// </summary>
@@ -201,29 +228,7 @@ namespace BookingSystemGym
             return Schedule.OrderBy(s => s.ScheduledTime.ToString()).ToList();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        
-
-        //public string ShowBrokenEquip()
-        //{
-        //    string res = "";
-        //    int index = 1;
-        //    foreach (Equipment e in Equipments)
-        //    {
-        //        if (e.Broken)
-        //        {
-        //            res += index + ". " + e.Name + "\n";
-        //            index++;
-        //        }
-        //    }
-        //    return res;
-        //}
-
         public string ShowEquip()
-
         {
             string res = "";
             int index = 1;
@@ -239,13 +244,12 @@ namespace BookingSystemGym
                     status = "Fungerande";
                 }
 
-                res += index + ". " + e.Name + " - " + status + "\n";
+                res += index + ". " + e.Type + " - " + status + "\n";
                 index++;
             }
             return res;
         }
 
-        //variant 1
         public void ChangeEquipmentStatus(User user, Equipment equipment)
         {
             if (user.Role == "Employee" || user.Role == "Admin")
@@ -254,20 +258,6 @@ namespace BookingSystemGym
             }
         }
 
-        //variant 2
-        public void ChangeEquipmentStatus(User user)
-        {
-            if (user.Role == "Employee" || user.Role == "Admin")
-            {
-                for (int i = 0; i < Equipments.Count; i++)
-                {
-                    Console.WriteLine($"{i + 1}. {Equipments[i].Name}");
-                }
-
-                int userInput = int.Parse(Console.ReadLine()) - 1;
-                Equipments[userInput].Broken = !Equipments[userInput].Broken;
-            }
-        }
 
         /// <summary>
         /// Check if users role are Admin or Emoloyee. Show all activity and let the user select which activity to change   
@@ -365,10 +355,11 @@ namespace BookingSystemGym
                 Console.WriteLine("\n");
             }
         }
+
         /// <summary>
         /// Send a sms to all participant in a canceled activity
         /// </summary>
-        /// <returns>string</returns>
+        /// <returns>A string massage</returns>
         public string SendMassage ()
         {
             //NYI
