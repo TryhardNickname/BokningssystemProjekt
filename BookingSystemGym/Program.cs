@@ -236,20 +236,23 @@ namespace BookingSystemGym
         static string GetMenuInput(int amountOfChoices)
         {
             string userInput = Console.ReadLine();
-
+            
             while (true)
             {
-                if (int.Parse(userInput) < amountOfChoices && int.Parse(userInput) >= 0) // && > 0
+                if (int.TryParse(userInput, out int num))
                 {
-                    if (amountOfChoices != 9999)
+                    if (num < amountOfChoices && num >= 0) // && > 0
                     {
-                        return userInput;
-                    }
-                    else
-                    {
-                        if (userInput.Length == 4)
+                        if (amountOfChoices != 9999)
                         {
                             return userInput;
+                        }
+                        else
+                        {
+                            if (userInput.Length == 4)
+                            {
+                                return userInput;
+                            }
                         }
                     }
                 }
@@ -270,8 +273,8 @@ namespace BookingSystemGym
                 Console.Write("Skriv ditt namn: ");
                 string name = Console.ReadLine();
 
-                Console.WriteLine("välj ditt medlems-id[nnnn]: "); //ge random? kolla igenom userlist och ge nästa? välja själv? felhantering?
-                string newId = Console.ReadLine();
+                Console.WriteLine("välj ditt medlems-id[nnnn]: "); 
+                string newId = GetMenuInput(9999);
 
                 //new user is added to UserList, and is set as CurrentUser
                 if (bs.Register(newId, "GymUser", name))
@@ -315,11 +318,11 @@ namespace BookingSystemGym
                     Console.WriteLine("= 6. Ladda upp bokningsschema ");
                     Console.WriteLine("= 0. Logga ut ");
                     Console.WriteLine("======================================================");
-                    return 6;
+                    return 7;
                 }
                 Console.WriteLine("= 0. Logga ut ");
                 Console.WriteLine("======================================================");
-                return 5;
+                return 6;
             }
             Console.WriteLine("= 0. Logga ut                                       =");
             Console.WriteLine("=====================================================");
