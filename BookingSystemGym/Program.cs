@@ -241,6 +241,9 @@ namespace BookingSystemGym
 
         }
 
+        /// <summary>
+        /// First menu
+        /// </summary>
         static void PrintLogInMenu()
         {
             Console.WriteLine();
@@ -253,7 +256,12 @@ namespace BookingSystemGym
             Console.Write("Ange val: ");
         }
 
-        //felhantering basic
+        /// <summary>
+        /// This method is used in various places to check for proper inputs 
+        /// And the loop keeps going until a valid answer is given.
+        /// </summary>
+        /// <param name="amountOfChoices">This is what the user inputs</param>
+        /// <returns></returns>
         static string GetMenuInput(int amountOfChoices)
         {
             string userInput = Console.ReadLine();
@@ -279,6 +287,11 @@ namespace BookingSystemGym
             }
         }
 
+        /// <summary>
+        /// This method is used once depending on how the user chooses to interact with the program
+        /// Either if user inputs unknown ID or if the user chooses to register
+        /// </summary>
+        /// <param name="bs"></param>
         static void RegisterNewUser(BookingSystem bs)
         {
 
@@ -296,12 +309,20 @@ namespace BookingSystemGym
             //gå till nästa meny
         }
 
+        /// <summary>
+        /// This method prints out the menu that comes after the login screen and is the base menu.
+        /// Depending on your clearance level, you will see different things so that regular gym users
+        /// cannot for example change the status of a machine.
+        /// </summary>
+        /// <param name="bs"></param>
+        /// <returns>This method returns the amount of choices a user has, to prevent users from inputing a number that it doesnt have access to
+        /// </returns>
         static int PrintMenu(BookingSystem bs)
         {
 
             Console.WriteLine();
             Console.WriteLine("==========================================");
-            Console.WriteLine($"= Välkommen till bokningen  {bs.CurrentUser.Name}!              =");
+            Console.WriteLine($"= Välkommen till bokningen  {bs.CurrentUser.Name}!      =");
             Console.WriteLine("= 1. Se Bokningsschemat och boka pass    =");
             Console.WriteLine("= 2. Se maskiners status                 =");
             Console.WriteLine("= 3. Boka Pass,PT...                     =");
@@ -327,6 +348,10 @@ namespace BookingSystemGym
             return 4;
         }
 
+        /// <summary>
+        /// The purpose of this method is to be able to create an activity apart from loading an activity list from a file
+        /// </summary>
+        /// <param name="bs"></param>
         static void CreateActivity(BookingSystem bs)
         {
             int sessionLength, maxParticipants, iD;
@@ -352,11 +377,16 @@ namespace BookingSystemGym
             bs.AddToSchedule(newActivity);
         }
 
+        /// <summary>
+        /// This method, together with another one, print out a list of activities that the user filter for
+        /// So for example, if input is 1, it filters for gym training and prints the list with only gym trainings.
+        /// </summary>
+        /// <param name="input">what the user inputed at line 93, represents a choice of which activities to filter for</param>
+        /// <param name="list">The filtered list of activities</param>
         static void PrintActivities(string input, List<Activity> list)
         {
 
             int activityCount = 1;
-            Console.WriteLine($"Typ av träning {input}");
             foreach (var item in list)
             {
                 Console.WriteLine("==========================================");
